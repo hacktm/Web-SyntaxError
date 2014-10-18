@@ -16,6 +16,8 @@ namespace CollegeBuffer.Tests.Models
 
         private static Group _group1;
         private static Group _group2;
+        private static Group _group3;
+        private static Group _group4;
 
         [ClassInitialize]
         public static void CreateEntities(TestContext testContext)
@@ -31,9 +33,27 @@ namespace CollegeBuffer.Tests.Models
 
                 _group1 = db.Groups.Add(_group1);
                 _group2 = db.Groups.Add(_group2);
+                _group3 = db.Groups.Add(_group3);
+                _group4 = db.Groups.Add(_group4);
 
                 if (db.SaveChanges() == 0)
                     throw new Exception("Not all entities have been created");
+
+                _group2.SubGroups.Add(_group1);
+                _group2.SubGroups.Add(_group3);
+                _group4.SuperGroup = _group1;
+
+                db.Groups.AddOrUpdate(_group1);
+                db.Groups.AddOrUpdate(_group2);
+                db.Groups.AddOrUpdate(_group3);
+                db.Groups.AddOrUpdate(_group4);
+
+                if (db.SaveChanges() == 0)
+                    throw new Exception("Entity relations could not be created!");
+
+                Assert.AreEqual(_group2.SubGroups.Count, 2);
+                Assert.AreEqual(_group1.SuperGroup.Id, _group2.Id);
+                Assert.AreEqual(_group1.SubGroups.Count, 1);
             }
         }
 
@@ -75,6 +95,8 @@ namespace CollegeBuffer.Tests.Models
         {
             _group1 = new Group { Id = Guid.NewGuid(), Name = "group1" };
             _group2 = new Group { Id = Guid.NewGuid(), Name = "group2" };
+            _group3 = new Group { Id = Guid.NewGuid(), Name = "group3" };
+            _group4 = new Group { Id = Guid.NewGuid(), Name = "group4" };
         }
 
         private static void GenerateUsers()

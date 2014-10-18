@@ -34,6 +34,12 @@ namespace CollegeBuffer.DAL.ContextInitializers
                     m.MapLeftKey("GroupId");
                     m.MapRightKey("UserId");
                 });
+
+            // Map to self
+            builder.Entity<Group>()
+                .HasOptional(p => p.SuperGroup)
+                .WithMany(p => p.SubGroups)
+                .Map(m => m.MapKey("SuperGroupId"));
         }
     }
 }
