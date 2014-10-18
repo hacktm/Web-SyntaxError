@@ -22,6 +22,7 @@ namespace CollegeBuffer.BLL
         private GroupRequestsRepository _groupRequestsRepository;
         private SubjectsRepository _subjectsRepository;
         private CommentsRepository _commentsRepository;
+        private AnnouncementsRepository _announcementsRepository;
 
         #endregion
 
@@ -72,6 +73,14 @@ namespace CollegeBuffer.BLL
             get
             {
                 return _commentsRepository ?? (_commentsRepository = new CommentsRepository(DbContext));
+            }
+        }
+
+        public AnnouncementsRepository AnnouncementsRepository
+        {
+            get
+            {
+                return _announcementsRepository ?? (_announcementsRepository = new AnnouncementsRepository(DbContext));
             }
         }
 

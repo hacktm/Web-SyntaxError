@@ -29,5 +29,7 @@ namespace CollegeBuffer.DAL.Model
 
         public virtual Collection<Subject> Subjects { get; set; }
 
+        public virtual Collection<Announcement> Announcements { get; set; }
+
     }
 }
