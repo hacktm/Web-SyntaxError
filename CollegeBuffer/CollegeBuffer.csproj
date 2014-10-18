@@ -142,7 +142,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -162,6 +164,10 @@
     <ProjectReference Include="..\CollegeBuffer.BLL\CollegeBuffer.BLL.csproj">
       <Project>{babba430-a22c-4eb6-b07b-3f7de80215bf}</Project>
       <Name>CollegeBuffer.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CollegeBuffer.DAL\CollegeBuffer.DAL.csproj">
+      <Project>{B660C4EE-10FC-4B85-8A17-C2448EEA2D13}</Project>
+      <Name>CollegeBuffer.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -52,6 +52,9 @@ namespace CollegeBuffer.DAL.Context
 
         public T Insert(T entity)
         {
+            if (entity.Id == Guid.Empty)
+                entity.Id = Guid.NewGuid();
+
             entity = _dbSet.Add(entity);
 
             return Save() ? entity : null;

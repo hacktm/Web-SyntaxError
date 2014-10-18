@@ -72,17 +72,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextInitializers\DatabaseContextInitializer.cs" />
+    <Compile Include="ContextInitializers\GroupsContextInitializer.cs" />
+    <Compile Include="ContextInitializers\StudentsContextInitializer.cs" />
     <Compile Include="Context\BaseRepository.cs" />
     <Compile Include="Context\BaseUnitOfWork.cs" />
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Model\AbstractModel.cs" />
     <Compile Include="Model\Enums\UserRoles.cs" />
     <Compile Include="Model\Group.cs" />
-    <Compile Include="Model\Student.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Special\ImageHandler.cs" />
   </ItemGroup>

@@ -3,7 +3,7 @@ using CollegeBuffer.DAL.Context;
 
 namespace CollegeBuffer.DAL.ContextInitializers
 {
-    public class DatabaseContextInitializer : CreateDatabaseIfNotExists<DatabaseContext>
+    internal class DatabaseContextInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {
         public override void InitializeDatabase(DatabaseContext context)
         {
