@@ -3,7 +3,7 @@ using CollegeBuffer.DAL.Model;
 
 namespace CollegeBuffer.BLL.Interfaces
 {
-    interface ISessionsRepository
+    internal interface ISessionsRepository
     {
         User GetUser(Guid sessionId, string sessionKey);
 

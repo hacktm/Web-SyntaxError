@@ -19,19 +19,9 @@ namespace CollegeBuffer.DAL.Context
 
         #region Persistence logic
 
-        public bool Save()
+        public int Save()
         {
-            try
-            {
-                DbContext.SaveChanges();
-
-                return true;
-            }
-
-            catch
-            {
-                return false;
-            }
+            return DbContext.SaveChanges();
         }
 
         #endregion
@@ -57,14 +47,14 @@ namespace CollegeBuffer.DAL.Context
 
             entity = DbSet.Add(entity);
 
-            return Save() ? entity : null;
+            return Save() != 0 ? entity : null;
         }
 
         public T Update(T entity)
         {
             DbSet.AddOrUpdate(entity);
 
-            return Save() ? Get(entity.Id) : null;
+            return Save() != 0 ? Get(entity.Id) : null;
         }
 
         public bool Delete(T entity)
@@ -74,7 +64,7 @@ namespace CollegeBuffer.DAL.Context
 
             DbSet.Remove(entity);
 
-            return Save();
+            return Save() != 0;
         }
 
         public bool Delete(Guid id)

@@ -26,5 +26,8 @@ namespace CollegeBuffer.DAL.Model
         public Group SuperGroup { get; set; }
 
         public Collection<GroupRequest> GroupRequests { get; set; }
+
+        public Collection<Subject> Subjects { get; set; }
+
     }
 }

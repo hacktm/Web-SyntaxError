@@ -81,6 +81,7 @@
     <Compile Include="ContextInitializers\GroupRequestsContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupsContextInitializer.cs" />
     <Compile Include="ContextInitializers\SessionsContextInitializer.cs" />
+    <Compile Include="ContextInitializers\SubjectsContextInitializer.cs" />
     <Compile Include="ContextInitializers\UsersContextInitializer.cs" />
     <Compile Include="Context\BaseRepository.cs" />
     <Compile Include="Context\BaseUnitOfWork.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupRequest.cs" />
     <Compile Include="Model\Session.cs" />
+    <Compile Include="Model\Subject.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Special\ImageHandler.cs" />

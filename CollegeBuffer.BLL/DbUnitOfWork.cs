@@ -1,5 +1,4 @@
-﻿using System;
-using CollegeBuffer.BLL.Repositories;
+﻿using CollegeBuffer.BLL.Repositories;
 using CollegeBuffer.DAL.Context;
 
 namespace CollegeBuffer.BLL
@@ -20,6 +19,8 @@ namespace CollegeBuffer.BLL
         private UsersRepository _usersRepository;
         private GroupsRepository _groupsRepository;
         private SessionsRepository _sessionsRepository;
+        private GroupRequestsRepository _groupRequestsRepository;
+        private SubjectsRepository _subjectsRepository;
 
         #endregion
 
@@ -46,6 +47,22 @@ namespace CollegeBuffer.BLL
             get
             {
                 return _sessionsRepository ?? (_sessionsRepository = new SessionsRepository(DbContext));
+            }
+        }
+
+        public GroupRequestsRepository GroupRequestsRepository
+        {
+            get
+            {
+                return _groupRequestsRepository ?? (_groupRequestsRepository = new GroupRequestsRepository(DbContext));
+            }
+        }
+
+        public SubjectsRepository SubjectsRepository
+        {
+            get
+            {
+                return _subjectsRepository ?? (_subjectsRepository = new SubjectsRepository(DbContext));
             }
         }
 

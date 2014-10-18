@@ -12,6 +12,11 @@ namespace CollegeBuffer.DAL.Context
             DbContext = new DatabaseContext();
         }
 
+        public int SaveAllChanges()
+        {
+            return DbContext.SaveChanges();
+        }
+
         #region Disposing logic
 
         private static bool _disposed;

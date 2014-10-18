@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Models\GroupRequestsTest.cs" />
     <Compile Include="Models\SessionsTest.cs" />
+    <Compile Include="Models\SubjectsTest.cs" />
     <Compile Include="Models\UsersGroupsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

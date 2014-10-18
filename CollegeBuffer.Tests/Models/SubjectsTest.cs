@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity.Migrations;
 using CollegeBuffer.DAL.Context;
 using CollegeBuffer.DAL.Model;
 using CollegeBuffer.DAL.Model.Enums;
@@ -8,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CollegeBuffer.Tests.Models
 {
     [TestClass]
-    public class UsersGroupsTest
+    public class SubjectsTest
     {
         private static User _user1;
         private static User _user2;
@@ -16,43 +15,12 @@ namespace CollegeBuffer.Tests.Models
 
         private static Group _group1;
         private static Group _group2;
-        private static Group _group3;
-        private static Group _group4;
 
         [ClassInitialize]
         public static void CreateEntities(TestContext testContext)
         {
             GenerateUsers();
             GenerateGroups();
-
-            using (var db = new DatabaseContext())
-            {
-                _user1 = db.Users.Add(_user1);
-                _user2 = db.Users.Add(_user2);
-                _user3 = db.Users.Add(_user3);
-
-                _group1 = db.Groups.Add(_group1);
-                _group2 = db.Groups.Add(_group2);
-                _group3 = db.Groups.Add(_group3);
-                _group4 = db.Groups.Add(_group4);
-
-                Assert.AreNotEqual(db.SaveChanges(), 0);
-
-                _group2.SubGroups.Add(_group1);
-                _group2.SubGroups.Add(_group3);
-                _group4.SuperGroup = _group1;
-
-                db.Groups.AddOrUpdate(_group1);
-                db.Groups.AddOrUpdate(_group2);
-                db.Groups.AddOrUpdate(_group3);
-                db.Groups.AddOrUpdate(_group4);
-
-                Assert.AreNotEqual(db.SaveChanges(), 0);
-
-                Assert.AreEqual(_group2.SubGroups.Count, 2);
-                Assert.AreEqual(_group1.SuperGroup.Id, _group2.Id);
-                Assert.AreEqual(_group1.SubGroups.Count, 1);
-            }
         }
 
         [ClassCleanup]
@@ -74,17 +42,30 @@ namespace CollegeBuffer.Tests.Models
         [TestMethod]
         public void CreateRelations()
         {
-            _group1.Administrators.Add(_user1);
-            _user2.GroupsAsAdministrator.Add(_group2);
+            var subject = new Subject
+            {
+                Id = Guid.NewGuid(),
+                Name = "subj",
+            };
 
-            _group1.Users.Add(_user2);
-            _group2.Users.Add(_user1);
-            _group2.Users.Add(_user3);
+            subject.Users.Add(_user1);
+            subject.Users.Add(_user2);
+            subject.Users.Add(_user3);
+            subject.Groups.Add(_group1);
+            subject.Groups.Add(_group2);
 
             using (var db = new DatabaseContext())
             {
-                db.Groups.AddOrUpdate(_group1);
-                db.Groups.AddOrUpdate(_group2);
+                subject = db.Subjects.Add(subject);
+
+                Assert.AreNotEqual(db.SaveChanges(), 0);
+
+                Assert.AreEqual(subject.Users.Count, 3);
+                Assert.AreEqual(subject.Groups.Count, 2);
+
+                db.Subjects.Remove(subject);
+
+                Assert.AreNotEqual(db.SaveChanges(), 0);
             }
         }
 
@@ -92,8 +73,6 @@ namespace CollegeBuffer.Tests.Models
         {
             _group1 = new Group { Id = Guid.NewGuid(), Name = "group1" };
             _group2 = new Group { Id = Guid.NewGuid(), Name = "group2" };
-            _group3 = new Group { Id = Guid.NewGuid(), Name = "group3" };
-            _group4 = new Group { Id = Guid.NewGuid(), Name = "group4" };
         }
 
         private static void GenerateUsers()

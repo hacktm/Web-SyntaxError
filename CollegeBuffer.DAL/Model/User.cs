@@ -34,5 +34,7 @@ namespace CollegeBuffer.DAL.Model
         public Session Session { get; set; }
 
         public Collection<GroupRequest> GroupRequests { get; set; }
+
+        public Collection<Subject> Subjects { get; set; }
     }
 }

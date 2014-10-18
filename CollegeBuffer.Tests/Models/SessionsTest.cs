@@ -26,18 +26,14 @@ namespace CollegeBuffer.Tests.Models
                 user = db.UsersRepository.Insert(user);
                 var session = db.SessionsRepository.Login(user.Username);
 
-                if (session == null)
-                    throw new Exception("Session not created!");
+                Assert.AreNotEqual(session, null);
 
                 user = db.SessionsRepository.GetUser(session.Id, session.SessionKey);
-                if (user == null)
-                    throw new Exception("Session not found after creation!");
+                
+                Assert.AreNotEqual(user, null);
 
-                if (!db.SessionsRepository.Logout(user.Username))
-                    throw new Exception("Session logout failed!");
-
-                if (!db.UsersRepository.Delete(user))
-                    throw new Exception("User could not be deleted!");
+                Assert.AreEqual(db.SessionsRepository.Logout(user.Username), true);
+                Assert.AreEqual(db.UsersRepository.Delete(user), true);
 
             }
         }

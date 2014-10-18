@@ -1,4 +1,5 @@
 ﻿using System;
+using CollegeBuffer.BLL;
 using CollegeBuffer.DAL.Context;
 using CollegeBuffer.DAL.Model;
 using CollegeBuffer.DAL.Model.Enums;
@@ -34,24 +35,22 @@ namespace CollegeBuffer.Tests.Models
                 User = user
             };
 
-            using (var db = new DatabaseContext())
+            using (var db = DbUnitOfWork.NewInstance())
             {
-                user = db.Users.Add(user);
-                group = db.Groups.Add(group);
-                request = db.GroupRequests.Add(request);
+                user = db.UsersRepository.Insert(user);
+                group = db.GroupsRepository.Insert(group);
+                request = db.GroupRequestsRepository.Insert(request);
 
-                if (db.SaveChanges() == 0)
-                    throw new Exception("The request couldn't be updated!");
+                Assert.AreNotEqual(db.SaveAllChanges(), false);
 
                 Assert.AreEqual(request.User.Id, user.Id);
                 Assert.AreEqual(request.Group.Id, group.Id);
 
-                db.GroupRequests.Remove(request);
-                db.Users.Remove(user);
-                db.Groups.Remove(group);
+                Assert.AreEqual(db.GroupRequestsRepository.Delete(request), true);
+                Assert.AreEqual(db.UsersRepository.Delete(user), true);
+                Assert.AreEqual(db.GroupsRepository.Delete(group), true);
 
-                if (db.SaveChanges() == 0)
-                    throw new Exception("Could not delete entities!");
+                Assert.AreNotEqual(db.SaveAllChanges(), false);
             }
         }
     }
