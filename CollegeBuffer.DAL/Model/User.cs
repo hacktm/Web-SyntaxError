@@ -25,10 +25,12 @@ namespace CollegeBuffer.DAL.Model
 
         public byte[] ImageData { get; set; }
 
+        public UserRoles Role { get; set; }
+
         public Collection<Group> GroupsAsStudent { get; set; }
 
         public Collection<Group> GroupsAsAdministrator { get; set; }
 
-        public UserRoles Role { get; set; }
+        public Session Session { get; set; }
     }
 }

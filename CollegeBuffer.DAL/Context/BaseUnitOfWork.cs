@@ -2,14 +2,15 @@
 
 namespace CollegeBuffer.DAL.Context
 {
-    public class BaseUnitOfWork
+    public class BaseUnitOfWork : IDisposable
     {
+        public DatabaseContext DbContext { get; private set; }
+
         public BaseUnitOfWork()
         {
             _disposed = false;
+            DbContext = new DatabaseContext();
         }
-
-        public DatabaseContext DbContext { get; private set; }
 
         #region Disposing logic
 
@@ -21,7 +22,7 @@ namespace CollegeBuffer.DAL.Context
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposed || !disposing) return;
 

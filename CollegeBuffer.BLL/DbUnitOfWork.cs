@@ -1,11 +1,15 @@
-﻿using CollegeBuffer.BLL.Repositories;
+﻿using System;
+using CollegeBuffer.BLL.Repositories;
 using CollegeBuffer.DAL.Context;
-using CollegeBuffer.DAL.Model;
 
 namespace CollegeBuffer.BLL
 {
     public class DbUnitOfWork : BaseUnitOfWork
     {
+        public DbUnitOfWork() : base()
+        {
+        }
+
         public static DbUnitOfWork NewInstance()
         {
             return new DbUnitOfWork();
@@ -15,8 +19,11 @@ namespace CollegeBuffer.BLL
 
         private UsersRepository _usersRepository;
         private GroupsRepository _groupsRepository;
+        private SessionsRepository _sessionsRepository;
 
         #endregion
+
+        #region properties
 
         public UsersRepository UsersRepository
         {
@@ -34,7 +41,13 @@ namespace CollegeBuffer.BLL
             }
         }
 
-        #region properties
+        public SessionsRepository SessionsRepository
+        {
+            get
+            {
+                return _sessionsRepository ?? (_sessionsRepository = new SessionsRepository(DbContext));
+            }
+        }
 
         #endregion
     }

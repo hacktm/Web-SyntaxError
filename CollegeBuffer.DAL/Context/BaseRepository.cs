@@ -8,13 +8,13 @@ namespace CollegeBuffer.DAL.Context
 {
     public abstract class BaseRepository<T> where T : AbstractModel
     {
-        private readonly DatabaseContext _dbContext;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DatabaseContext DbContext;
+        protected readonly DbSet<T> DbSet;
 
         protected BaseRepository(DatabaseContext context)
         {
-            _dbContext = context;
-            _dbSet = context.Set<T>();
+            DbContext = context;
+            DbSet = context.Set<T>();
         }
 
         #region Persistence logic
@@ -23,7 +23,7 @@ namespace CollegeBuffer.DAL.Context
         {
             try
             {
-                _dbContext.SaveChanges();
+                DbContext.SaveChanges();
 
                 return true;
             }
@@ -40,13 +40,13 @@ namespace CollegeBuffer.DAL.Context
 
         public T Get(Guid id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = DbSet.Find(id);
             return entity;
         }
 
         public T[] GetAll()
         {
-            var entities = _dbSet.ToArray();
+            var entities = DbSet.ToArray();
             return entities;
         }
 
@@ -55,31 +55,31 @@ namespace CollegeBuffer.DAL.Context
             if (entity.Id == Guid.Empty)
                 entity.Id = Guid.NewGuid();
 
-            entity = _dbSet.Add(entity);
+            entity = DbSet.Add(entity);
 
             return Save() ? entity : null;
         }
 
         public T Update(T entity)
         {
-            _dbSet.AddOrUpdate(entity);
+            DbSet.AddOrUpdate(entity);
 
             return Save() ? Get(entity.Id) : null;
         }
 
         public bool Delete(T entity)
         {
-            if (_dbContext.Entry(entity).State == EntityState.Detached)
-                _dbSet.Attach(entity);
+            if (DbContext.Entry(entity).State == EntityState.Detached)
+                DbSet.Attach(entity);
 
-            _dbSet.Remove(entity);
+            DbSet.Remove(entity);
 
             return Save();
         }
 
         public bool Delete(Guid id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = DbSet.Find(id);
 
             return Delete(entity);
         }

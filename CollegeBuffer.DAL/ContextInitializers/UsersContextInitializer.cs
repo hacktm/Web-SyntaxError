@@ -20,6 +20,12 @@ namespace CollegeBuffer.DAL.ContextInitializers
             builder.Entity<User>().Property(p => p.ImageData).IsOptional();
 
             builder.Entity<User>().Property(p => p.Gender).HasColumnType("char").HasMaxLength(1);
+
+            // Map to the Sessions table
+            builder.Entity<User>()
+                .HasOptional(p => p.Session)
+                .WithOptionalPrincipal(p => p.User)
+                .Map(m => m.MapKey("SessionId"));
         }
     }
 }

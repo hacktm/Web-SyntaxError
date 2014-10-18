@@ -10,12 +10,12 @@ namespace CollegeBuffer.Tests.Models
     [TestClass]
     public class UsersGroupsTest
     {
-        private static User user1;
-        private static User user2;
-        private static User user3;
+        private static User _user1;
+        private static User _user2;
+        private static User _user3;
 
-        private static Group group1;
-        private static Group group2;
+        private static Group _group1;
+        private static Group _group2;
 
         [ClassInitialize]
         public static void CreateEntities(TestContext testContext)
@@ -25,12 +25,12 @@ namespace CollegeBuffer.Tests.Models
 
             using (var db = new DatabaseContext())
             {
-                user1 = db.Users.Add(user1);
-                user2 = db.Users.Add(user2);
-                user3 = db.Users.Add(user3);
+                _user1 = db.Users.Add(_user1);
+                _user2 = db.Users.Add(_user2);
+                _user3 = db.Users.Add(_user3);
 
-                group1 = db.Groups.Add(group1);
-                group2 = db.Groups.Add(group2);
+                _group1 = db.Groups.Add(_group1);
+                _group2 = db.Groups.Add(_group2);
 
                 if (db.SaveChanges() == 0)
                     throw new Exception("Not all entities have been created");
@@ -42,12 +42,12 @@ namespace CollegeBuffer.Tests.Models
         {
             using (var db = new DatabaseContext())
             {
-                db.Users.Remove(user1);
-                db.Users.Remove(user2);
-                db.Users.Remove(user3);
+                db.Users.Remove(_user1);
+                db.Users.Remove(_user2);
+                db.Users.Remove(_user3);
 
-                db.Groups.Remove(group1);
-                db.Groups.Remove(group2);
+                db.Groups.Remove(_group1);
+                db.Groups.Remove(_group2);
 
                 if (db.SaveChanges() == 0)
                     throw new Exception("Not all entities have been created");
@@ -57,38 +57,38 @@ namespace CollegeBuffer.Tests.Models
         [TestMethod]
         public void CreateRelations()
         {
-            group1.Administrators.Add(user1);
-            user2.GroupsAsAdministrator.Add(group2);
+            _group1.Administrators.Add(_user1);
+            _user2.GroupsAsAdministrator.Add(_group2);
 
-            group1.Users.Add(user2);
-            group2.Users.Add(user1);
-            group2.Users.Add(user3);
+            _group1.Users.Add(_user2);
+            _group2.Users.Add(_user1);
+            _group2.Users.Add(_user3);
 
             using (var db = new DatabaseContext())
             {
-                db.Groups.AddOrUpdate(group1);
-                db.Groups.AddOrUpdate(group2);
+                db.Groups.AddOrUpdate(_group1);
+                db.Groups.AddOrUpdate(_group2);
             }
         }
 
         private static void GenerateGroups()
         {
-            group1 = new Group { Id = Guid.NewGuid(), Name = "group1" };
-            group2 = new Group { Id = Guid.NewGuid(), Name = "group2" };
+            _group1 = new Group { Id = Guid.NewGuid(), Name = "group1" };
+            _group2 = new Group { Id = Guid.NewGuid(), Name = "group2" };
         }
 
         private static void GenerateUsers()
         {
-            user1 = new User
+            _user1 = new User
             {
                 Id = Guid.NewGuid(),
                 Username = "user1",
                 Password = "pass",
                 EMail = "user1@user.com",
-                Role = UserRoles.Student
+                Role = UserRoles.Student,
             };
 
-            user2 = new User
+            _user2 = new User
             {
                 Id = Guid.NewGuid(),
                 Username = "user2",
@@ -97,7 +97,7 @@ namespace CollegeBuffer.Tests.Models
                 Role = UserRoles.Student
             };
 
-            user3 = new User
+            _user3 = new User
             {
                 Id = Guid.NewGuid(),
                 Username = "user3",

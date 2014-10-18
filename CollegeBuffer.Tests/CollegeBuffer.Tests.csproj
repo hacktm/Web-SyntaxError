@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\SessionsTest.cs" />
     <Compile Include="Models\UsersGroupsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -98,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CollegeBuffer.BLL\CollegeBuffer.BLL.csproj">
+      <Project>{BABBA430-A22C-4EB6-B07B-3F7DE80215BF}</Project>
+      <Name>CollegeBuffer.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CollegeBuffer.DAL\CollegeBuffer.DAL.csproj">
       <Project>{B660C4EE-10FC-4B85-8A17-C2448EEA2D13}</Project>
       <Name>CollegeBuffer.DAL</Name>

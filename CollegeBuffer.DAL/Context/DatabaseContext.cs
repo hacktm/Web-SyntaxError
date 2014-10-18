@@ -20,10 +20,13 @@ namespace CollegeBuffer.DAL.Context
 
             UsersContextInitializer.InitializeContext(modelBuilder);
             GroupsContextInitializer.InitializeContext(modelBuilder);
+            SessionsContextInitializer.InitializeContext(modelBuilder);
         }
 
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Group> Groups { get; set; }
+
+        public virtual DbSet<Session> Sessions { get; set; }
     }
 }
