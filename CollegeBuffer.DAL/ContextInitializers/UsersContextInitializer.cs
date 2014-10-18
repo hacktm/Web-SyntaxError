@@ -21,11 +21,11 @@ namespace CollegeBuffer.DAL.ContextInitializers
 
             builder.Entity<User>().Property(p => p.Gender).HasColumnType("char").HasMaxLength(1);
 
-            // Map to the Sessions table
+            // Map to the Session table
             builder.Entity<User>()
                 .HasOptional(p => p.Session)
                 .WithOptionalPrincipal(p => p.User)
-                .Map(m => m.MapKey("SessionId"));
+                .Map(m => m.MapKey("UserId"));
         }
     }
 }
