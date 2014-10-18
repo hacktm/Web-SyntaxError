@@ -19,7 +19,7 @@
     <script src="/Scripts/jquery-1.10.2.min.js" type="text/javascript"> </script>
     <script src="/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"> </script>
     <script src="/Scripts/bootstrap.min.js" type="text/javascript"> </script>
-@*    <script src="/Scripts/respond.min.js" type="text/javascript"> </script>*@
+    @*    <script src="/Scripts/respond.min.js" type="text/javascript"> </script>*@
 
     <!--fonts-->
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css' />
@@ -49,13 +49,13 @@
                 </p>
                 <p>You can login with <a class="btn btn-primary btn-lg" role="button">Facebook</a> or your account. </p>
 
-                @using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "loginUser(data);stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }))
+                @using (Ajax.BeginForm("Login", "Account", new AjaxOptions { OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "loginUser(data);stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }))
                 {
                     <div class="input-group-lg blackinput">
                         @Html.TextBoxFor(p => p.UserName, new { placeholder = "Username", @class = "input-lg" })
                         @Html.PasswordFor(p => p.Password, new { placeholder = "Password", @class = "input-lg" })
                     </div>
-                    <br/>
+                    <br />
                     <input type="submit" value="Log me in!" class="btn btn-lg btn-success" />
                 }
             </div>
@@ -64,27 +64,27 @@
         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
             <h1>Register now (using <a class="btn btn-primary btn" role="button">Facebook</a>)</h1>
             <div class="input-group blackinput">
-                @using (Ajax.BeginForm("Register", "Account", new AjaxOptions {OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "loginUser(data);stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);"}))
+                @using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "registerUser(data);stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }))
                 {
                     <table class="logintable">
                         <tr>
-                            <td>@Html.TextBoxFor(p => p.FirstName, new {placeholder = "First Name", @class = "input-lg"})</td>
-                            <td>@Html.TextBoxFor(p => p.LastName, new {placeholder = "Last Name", @class = "input-lg"})</td>
+                            <td>@Html.TextBoxFor(p => p.FirstName, new { placeholder = "First Name", @class = "input-lg" })</td>
+                            <td>@Html.TextBoxFor(p => p.LastName, new { placeholder = "Last Name", @class = "input-lg" })</td>
                         </tr>
                         <tr>
-                            <td>@Html.TextBoxFor(p => p.NewUserName, new {placeholder = "Username", @class = "input-lg"})</td>
+                            <td>@Html.TextBoxFor(p => p.NewUserName, new { placeholder = "Username", @class = "input-lg" })</td>
                         </tr>
                         <tr>
-                            <td>@Html.TextBoxFor(p => p.EmailAddress, new {placeholder = "Email", @class = "input-lg"})</td>
+                            <td>@Html.TextBoxFor(p => p.EmailAddress, new { placeholder = "Email", @class = "input-lg" })</td>
                         </tr>
                         <tr>
-                            <td>@Html.PasswordFor(p => p.NewPassword, new {placeholder = "Password", @class = "input-lg"})</td>
+                            <td>@Html.PasswordFor(p => p.NewPassword, new { placeholder = "Password", @class = "input-lg" })</td>
                         </tr>
                         <tr>
-                            <td>@Html.PasswordFor(p => p.PasswordAgain, new {placeholder = "Retype password", @class = "input-lg"})</td>
+                            <td>@Html.PasswordFor(p => p.PasswordAgain, new { placeholder = "Retype password", @class = "input-lg" })</td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Register!" class="btn btn-lg btn-success"/></td>
+                            <td><input type="submit" value="Register!" class="btn btn-lg btn-success" /></td>
                         </tr>
                     </table>
                 }
@@ -120,7 +120,7 @@
             setTimeout(function () { $("#message").fadeToggle(500); }, 2000);
             setTimeout(function () { $("#message").removeClass(className); }, 2600);
         }
-        
+
         /* Login&register functions */
         function loginUser(data) {
             //Initialisations
@@ -133,6 +133,35 @@
                 $("#UserName").css("border-color", "red");
                 $("#Password").css("border-color", "red");
                 showMessage('alert-danger', 'The username or password is incorrect!');
+            }
+        }
+
+        function registerUser(data) {
+            //Initialisations
+            $("#NewUserName").css("border-color", "white");
+            $("#NewPassword").css("border-color", "white");
+            $("#PasswordAgain").css("border-color", "white");
+            $("#EmailAddress").css("border-color", "white");
+            $('#loading').hide();
+
+            if (data == "K") document.location.reload(true);
+            else if (data == "U") {
+                $("#NewUserName").css("border-color", "red");
+                showMessage('alert-danger', 'Username between 4-28 chars, starting with letter.');
+            } else if (data == "D") {
+                $("#NewUserName").css("border-color", "red");
+                showMessage('alert-warning', 'This username is already taken!');
+            } else if (data == "E") {
+                $("#EmailAddress").css("border-color", "red");
+                showMessage('alert-danger', 'The email address is not valid!');
+            } else if (data == "P") {
+                $("#NewPassword").css("border-color", "red");
+                showMessage('alert-danger', 'The password must be between 6-28 chars!');
+            } else if (data == "M") {
+                $("#PasswordAgain").css("border-color", "red");
+                showMessage('alert-danger', 'The passwords don\'t match!');
+            } else if (data == "F") {
+                showMessage('alert-danger', 'The registration failed!');
             }
         }
 

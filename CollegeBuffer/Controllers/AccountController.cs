@@ -27,16 +27,16 @@ namespace CollegeBuffer.Controllers
         {
             using (var db = DbUnitOfWork.NewInstance())
             {
-                if (db.UsersRepository.VerifyExists(model.UserName))
-                    return "U";
+                if (!db.UsersRepository.VerifyExists(model.UserName))
+                    return "F";
 
                 if (!db.UsersRepository.VerifyPassword(model.UserName, model.Password))
                 {
-                    return "P";
+                    return "F";
                 }
-                
+
                 //Make a new session for the user
-                Session newSession = db.SessionsRepository.Login(model.UserName);
+                var newSession = db.SessionsRepository.Login(model.UserName);
 
                 //Create the cookies for the session
                 _myCookie.SetCookie("sessionId", newSession.Id.ToString(), DateTime.Now.AddMonths(6));
@@ -69,16 +69,28 @@ namespace CollegeBuffer.Controllers
 
                 var newUser = new User
                 {
-                    Username = model.UserName,
+                    Username = model.NewUserName,
                     EMail = model.EmailAddress,
-                    Password = model.Password,
+                    Password = model.NewPassword,
                     Role = UserRoles.Student
                 };
 
                 // When creating a new user, the UnitOfWork automatically creates a validation entry in the
                 // AccountValidations table for the user.
                 // The password is also automatically encrypted in the model
-                return db.UsersRepository.Insert(newUser) != null ? "K" : "F";
+                if (db.UsersRepository.Insert(newUser) != null)
+                {
+                    //Make a new session for the user
+                    var newSession = db.SessionsRepository.Login(model.NewUserName);
+
+                    //Create the cookies for the session
+                    _myCookie.SetCookie("sessionId", newSession.Id.ToString(), DateTime.Now.AddMonths(6));
+                    _myCookie.SetCookie("sessionKey", newSession.SessionKey, DateTime.Now.AddMonths(6));
+
+                    return "K";
+                }
+
+                return "F";
             }
         }
 
@@ -96,10 +108,12 @@ namespace CollegeBuffer.Controllers
             try
             {
                 //Delete the session variable but remember the userName
-                var userName = MySession.Current.UserDetails.UserName;
+                var userName = MySession.Current.UserDetails.Username;
                 MySession.Current.UserDetails = null;
-
-                return DatabaseWorkUnit.Instance.SessionRepository.Logout(userName) ? "K" : "F";
+                using (var db = DbUnitOfWork.NewInstance())
+                {
+                    return db.SessionsRepository.Logout(userName) ? "K" : "F";
+                }
             }
             catch (Exception)
             {
@@ -107,21 +121,24 @@ namespace CollegeBuffer.Controllers
             }
         }
 
-        public AccountModels.UserAccount GetUserDetails()
+        public User GetUserDetails()
         {
-            if (_myCookie.GetCookie("sessionId") == "" || _myCookie.GetCookie("sessionKey") == "")
-                return null;
-
-            var user = DatabaseWorkUnit.Instance.SessionRepository.GetUser(
-                new Guid(_myCookie.GetCookie("sessionId")), _myCookie.GetCookie("sessionKey"));
-
-            if (user == null)
+            using (var db = DbUnitOfWork.NewInstance())
             {
+                if (_myCookie.GetCookie("sessionId") == "" || _myCookie.GetCookie("sessionKey") == "")
+                    return null;
+
+                var user = db.SessionsRepository.GetUser(
+                    new Guid(_myCookie.GetCookie("sessionId")), _myCookie.GetCookie("sessionKey"));
+
+                if (user != null) return user;
+
                 _myCookie.DeleteCookie("sessionId");
                 _myCookie.DeleteCookie("sessionKey");
+
+                return null;
             }
 
-            return user;
         }
 
     }
