@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using CollegeBuffer.BLL;
 using CollegeBuffer.BLL.Repositories;
 using CollegeBuffer.DAL.Model;
@@ -68,7 +69,7 @@ namespace CollegeBuffer.Controllers
             if (MySession.Current.UserDetails == null)
                 return Redirect("/Home/Login");
 
-
+            return Content("");
         }
 
     }

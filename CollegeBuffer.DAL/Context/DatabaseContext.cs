@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Configuration;
+using System.Data.Entity;
 using CollegeBuffer.DAL.ContextInitializers;
 using CollegeBuffer.DAL.Model;
 

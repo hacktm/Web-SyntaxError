@@ -43,10 +43,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">My groups</a>
+                    <a href="/Home/MyGroups" onclick='go("Home", "MyGroups", "");'>My groups</a>
                 </li>
                 <li>
-                    <a href="#">Edit profile</a>
+                    <a href="/Home/EditProfile" onclick='go("Home", "EditProfile", "");'>Edit profile</a>
                 </li>
                 <li>
                     <a href="#">Overview</a>
@@ -68,7 +68,7 @@
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid">
+            <div id="contentbody" class="container-fluid">
                 @RenderBody()
             </div>
         </div>
