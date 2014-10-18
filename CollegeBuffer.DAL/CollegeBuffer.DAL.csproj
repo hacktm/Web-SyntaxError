@@ -96,6 +96,7 @@
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupRequest.cs" />
+    <Compile Include="Model\Notifications.cs" />
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\Subject.cs" />
     <Compile Include="Model\User.cs" />

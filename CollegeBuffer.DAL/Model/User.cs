@@ -8,7 +8,11 @@ namespace CollegeBuffer.DAL.Model
         public User()
         {
             GroupsAsStudent = new Collection<Group>();    
-            GroupsAsAdministrator = new Collection<Group>();    
+            GroupsAsAdministrator = new Collection<Group>();
+            GroupRequests = new Collection<GroupRequest>();
+            Subjects = new Collection<Subject>();
+            Comments = new Collection<Comment>();
+            Announcements = new Collection<Announcement>();
         }
 
         public string Username { get; set; }
@@ -27,11 +31,11 @@ namespace CollegeBuffer.DAL.Model
 
         public UserRoles Role { get; set; }
 
+        public virtual Session Session { get; set; }
+
         public virtual Collection<Group> GroupsAsStudent { get; set; }
 
         public virtual Collection<Group> GroupsAsAdministrator { get; set; }
-
-        public virtual Session Session { get; set; }
 
         public virtual Collection<GroupRequest> GroupRequests { get; set; }
 

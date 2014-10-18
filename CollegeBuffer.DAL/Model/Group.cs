@@ -9,6 +9,9 @@ namespace CollegeBuffer.DAL.Model
             Users = new Collection<User>();    
             Administrators = new Collection<User>();  
             SubGroups = new Collection<Group>();
+            GroupRequests = new Collection<GroupRequest>();
+            Subjects = new Collection<Subject>();
+            Announcements = new Collection<Announcement>();
         }
 
         public string Name { get; set; }
@@ -17,13 +20,13 @@ namespace CollegeBuffer.DAL.Model
 
         public byte[] ImageData { get; set; }
 
+        public virtual Group SuperGroup { get; set; }
+
         public virtual Collection<User> Users { get; set; }
 
         public virtual Collection<User> Administrators { get; set; }
 
         public virtual Collection<Group> SubGroups { get; set; }
-
-        public virtual Group SuperGroup { get; set; }
 
         public virtual Collection<GroupRequest> GroupRequests { get; set; }
 
