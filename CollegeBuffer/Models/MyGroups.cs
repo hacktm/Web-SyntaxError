@@ -7,11 +7,9 @@ using CollegeBuffer.DAL.Model;
 
 namespace CollegeBuffer.Models
 {
-    public class Index
+    public class MyGroups
     {
-        public List<Announcement> Announcements { get; set; }
-
-        public String Error = null;
-
+        public Collection<Group> GroupsAsAdmin { get; set; }
+        public Collection<Group> GroupsAsUser { get; set; }
     }
 }

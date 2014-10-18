@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using CollegeBuffer.BLL;
 using CollegeBuffer.DAL.Model;
 using CollegeBuffer.DAL.Model.Enums;
+using CollegeBuffer.DAL.Special;
 using CollegeBuffer.Models;
 using CollegeBuffer.Special;
 
@@ -30,7 +31,7 @@ namespace CollegeBuffer.Controllers
                 if (!db.UsersRepository.VerifyExists(model.UserName))
                     return "F";
 
-                if (!db.UsersRepository.VerifyPassword(model.UserName, model.Password))
+                if (!db.UsersRepository.VerifyPassword(model.UserName, TokenGenerator.EncryptMd5(model.Password)))
                 {
                     return "F";
                 }
@@ -71,7 +72,9 @@ namespace CollegeBuffer.Controllers
                 {
                     Username = model.NewUserName,
                     EMail = model.EmailAddress,
-                    Password = model.NewPassword,
+                    Password = TokenGenerator.EncryptMd5(model.NewPassword),
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
                     Role = UserRoles.Student
                 };
 

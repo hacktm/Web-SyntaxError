@@ -1,6 +1,5 @@
 ﻿@using System.Web.UI.WebControls
 @using CollegeBuffer.Models
-@model HomePage
 
 @{
     Layout = null;
@@ -31,13 +30,52 @@
         var stop = false;
     </script>
 
+    
+    <div id="wrapper">
 
-
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            @RenderBody()
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/Home/Index" onclick='go("Home", "Index", "");'>
+                        Start Page
+                    </a>
+                </li>
+                <li>
+                    <a href="#">My groups</a>
+                </li>
+                <li>
+                    <a href="#">Edit profile</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
         </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
+    <!-- /#wrapper -->
 
 
     <!--message-->
@@ -123,6 +161,7 @@
                 history.pushState({ controller: a, method: b, id: c }, b, page);
             setupPage(page);
             event.preventDefault();
+            return false;
         }
 
         window.onpopstate = function (event) {
