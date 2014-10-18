@@ -21,7 +21,8 @@ namespace CollegeBuffer.DAL.ContextInitializers
             builder.Entity<AnnouncementNotification>()
                 .HasRequired(p => p.User)
                 .WithMany(p => p.AnnouncementNotifications)
-                .Map(m => m.MapKey("UserId"));
+                .Map(m => m.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
         }
 
         public static void InitializeEventNotifications(DbModelBuilder builder)
@@ -34,7 +35,8 @@ namespace CollegeBuffer.DAL.ContextInitializers
             builder.Entity<EventNotification>()
                 .HasRequired(p => p.User)
                 .WithMany(p => p.EventNotifications)
-                .Map(m => m.MapKey("UserId"));
+                .Map(m => m.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
         }
     }
 }

@@ -25,13 +25,13 @@ namespace CollegeBuffer.Tests.Models
             var subject1 = new Subject
             {
                 Id = Guid.NewGuid(),
-                Name = "subj",
+                Name = "subj"
             };
 
             var subject2 = new Subject
             {
                 Id = Guid.NewGuid(),
-                Name = "subj",
+                Name = "subj"
             };
 
             using (var db = new DatabaseContext())
@@ -54,6 +54,8 @@ namespace CollegeBuffer.Tests.Models
                 var ev = new Event
                 {
                     Id = Guid.NewGuid(),
+                    Title = "title",
+                    Message = "message",
                     DateCreated = DateTime.Now,
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now,

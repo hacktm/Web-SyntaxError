@@ -15,13 +15,15 @@ namespace CollegeBuffer.DAL.ContextInitializers
             builder.Entity<GroupRequest>()
                 .HasRequired(p => p.Group)
                 .WithMany(p => p.GroupRequests)
-                .Map(m => m.MapKey("GroupId"));
+                .Map(m => m.MapKey("GroupId"))
+                .WillCascadeOnDelete(true);
 
             // Map to the Users table
             builder.Entity<GroupRequest>()
                 .HasRequired(p => p.User)
                 .WithMany(p => p.GroupRequests)
-                .Map(m => m.MapKey("UserId"));
+                .Map(m => m.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
         }
     }
 }

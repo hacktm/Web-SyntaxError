@@ -17,13 +17,15 @@ namespace CollegeBuffer.DAL.ContextInitializers
             builder.Entity<Announcement>()
                 .HasRequired(p => p.User)
                 .WithMany(p => p.Announcements)
-                .Map(m => m.MapKey("UserId"));
+                .Map(m => m.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
 
             // Map to the Groups table
             builder.Entity<Announcement>()
                 .HasRequired(p => p.Group)
                 .WithMany(p => p.Announcements)
-                .Map(m => m.MapKey("GroupId"));
+                .Map(m => m.MapKey("GroupId"))
+                .WillCascadeOnDelete(true);
         }
     }
 }

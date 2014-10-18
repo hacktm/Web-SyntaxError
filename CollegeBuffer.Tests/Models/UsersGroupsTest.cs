@@ -104,7 +104,7 @@ namespace CollegeBuffer.Tests.Models
                 Username = "user1",
                 Password = "pass",
                 EMail = "user1@user.com",
-                Role = UserRoles.Student,
+                Role = UserRoles.Student
             };
 
             _user2 = new User
