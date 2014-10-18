@@ -5,10 +5,6 @@ namespace CollegeBuffer.BLL
 {
     public class DbUnitOfWork : BaseUnitOfWork
     {
-        public DbUnitOfWork() : base()
-        {
-        }
-
         public static DbUnitOfWork NewInstance()
         {
             return new DbUnitOfWork();
@@ -23,6 +19,8 @@ namespace CollegeBuffer.BLL
         private SubjectsRepository _subjectsRepository;
         private CommentsRepository _commentsRepository;
         private AnnouncementsRepository _announcementsRepository;
+        private AnnouncementNotificationsRepository _announcementNotificationsRepository;
+        private EventNotificationsRepository _eventNotificationsRepository;
 
         #endregion
 
@@ -81,6 +79,24 @@ namespace CollegeBuffer.BLL
             get
             {
                 return _announcementsRepository ?? (_announcementsRepository = new AnnouncementsRepository(DbContext));
+            }
+        }
+
+        public AnnouncementNotificationsRepository AnnouncementNotificationsRepository
+        {
+            get
+            {
+                return _announcementNotificationsRepository ??
+                       (_announcementNotificationsRepository = new AnnouncementNotificationsRepository(DbContext));
+            }
+        }
+
+        public EventNotificationsRepository EventNotificationsRepository
+        {
+            get
+            {
+                return _eventNotificationsRepository ??
+                       (_eventNotificationsRepository = new EventNotificationsRepository(DbContext));
             }
         }
 

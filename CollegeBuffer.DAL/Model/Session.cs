@@ -1,4 +1,6 @@
-﻿namespace CollegeBuffer.DAL.Model
+﻿using CollegeBuffer.DAL.Model.Abstract;
+
+namespace CollegeBuffer.DAL.Model
 {
     public class Session : AbstractModel
     {

@@ -2,7 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using CollegeBuffer.DAL.Model;
+using CollegeBuffer.DAL.Model.Abstract;
 
 namespace CollegeBuffer.DAL.Context
 {

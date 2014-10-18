@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
+using CollegeBuffer.DAL.Model.Abstract;
 
 namespace CollegeBuffer.DAL.Model
 {

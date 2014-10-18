@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using CollegeBuffer.DAL.Model.Abstract;
 
 namespace CollegeBuffer.DAL.Model
 {
@@ -9,6 +10,10 @@ namespace CollegeBuffer.DAL.Model
         {
             Subjects = new Collection<Subject>();
         }
+
+        public string Title { get; set; }
+
+        public string Message { get; set; }
 
         public DateTime? DateCreated { get; set; }
 

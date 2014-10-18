@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using CollegeBuffer.DAL.Model.Abstract;
 using CollegeBuffer.DAL.Model.Enums;
 
 namespace CollegeBuffer.DAL.Model
@@ -13,6 +14,8 @@ namespace CollegeBuffer.DAL.Model
             Subjects = new Collection<Subject>();
             Comments = new Collection<Comment>();
             Announcements = new Collection<Announcement>();
+            AnnouncementNotifications = new Collection<AnnouncementNotification>();
+            EventNotifications = new Collection<EventNotification>();
         }
 
         public string Username { get; set; }
@@ -43,6 +46,10 @@ namespace CollegeBuffer.DAL.Model
 
         public virtual Collection<Comment> Comments { get; set; }
 
-        public virtual Collection<Announcement> Announcements { get; set; } 
+        public virtual Collection<Announcement> Announcements { get; set; }
+
+        public virtual Collection<AnnouncementNotification> AnnouncementNotifications { get; set; }
+
+        public virtual Collection<EventNotification> EventNotifications { get; set; } 
     }
 }

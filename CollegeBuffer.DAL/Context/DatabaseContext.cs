@@ -26,6 +26,7 @@ namespace CollegeBuffer.DAL.Context
             CommentsContextInitializer.InitializeContext(modelBuilder);
             AnnouncementsContextInitializer.InitializeContext(modelBuilder);
             EventsContextInitializer.InitializeContext(modelBuilder);
+            NotificationsContextInitializer.InitializeContext(modelBuilder);
         }
 
         public virtual DbSet<User> Users { get; set; }
@@ -43,5 +44,9 @@ namespace CollegeBuffer.DAL.Context
         public virtual DbSet<Announcement> Announcements { get; set; }
 
         public virtual DbSet<Event> Events { get; set; }
+
+        public virtual DbSet<AnnouncementNotification> AnnouncementNotifications { get; set; }
+
+        public virtual DbSet<EventNotification> EventNotifications { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace CollegeBuffer.DAL.ContextInitializers
         {
             builder.Entity<Event>().HasKey(k => k.Id);
 
+            builder.Entity<Event>().Property(p => p.Title).IsRequired();
+            builder.Entity<Event>().Property(p => p.Message).IsRequired();
             builder.Entity<Event>().Property(p => p.DateCreated).IsRequired();
             builder.Entity<Event>().Property(p => p.StartDate).IsRequired();
             builder.Entity<Event>().Property(p => p.EndDate).IsRequired();
