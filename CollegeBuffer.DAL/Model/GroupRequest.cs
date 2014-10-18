@@ -2,12 +2,12 @@
 
 namespace CollegeBuffer.DAL.Model
 {
-    public sealed class GroupRequest : AbstractModel
+    public class GroupRequest : AbstractModel
     {
         public DateTime? Date { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public Group Group { get; set; }
+        public virtual Group Group { get; set; }
     }
 }

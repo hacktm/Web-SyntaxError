@@ -25,7 +25,8 @@ namespace CollegeBuffer.DAL.ContextInitializers
             builder.Entity<User>()
                 .HasOptional(p => p.Session)
                 .WithOptionalPrincipal(p => p.User)
-                .Map(m => m.MapKey("UserId"));
+                .Map(m => m.MapKey("UserId"))
+                .WillCascadeOnDelete(true);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace CollegeBuffer.DAL.Model
 {
-    public sealed class Comment : AbstractModel
+    public class Comment : AbstractModel
     {
         public Comment()
         {
@@ -14,10 +14,10 @@ namespace CollegeBuffer.DAL.Model
 
         public string Text { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
-        public Comment ParentComment { get; set; }
+        public virtual Comment ParentComment { get; set; }
 
-        public Collection<Comment> Replies { get; set; } 
+        public virtual Collection<Comment> Replies { get; set; } 
     }
 }

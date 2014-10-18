@@ -2,7 +2,7 @@
 
 namespace CollegeBuffer.DAL.Model
 {
-    public sealed class Group : AbstractModel
+    public class Group : AbstractModel
     {
         public Group()
         {
@@ -17,17 +17,17 @@ namespace CollegeBuffer.DAL.Model
 
         public byte[] ImageData { get; set; }
 
-        public Collection<User> Users { get; set; }
+        public virtual Collection<User> Users { get; set; }
 
-        public Collection<User> Administrators { get; set; }
+        public virtual Collection<User> Administrators { get; set; }
 
-        public Collection<Group> SubGroups { get; set; }
+        public virtual Collection<Group> SubGroups { get; set; }
 
-        public Group SuperGroup { get; set; }
+        public virtual Group SuperGroup { get; set; }
 
-        public Collection<GroupRequest> GroupRequests { get; set; }
+        public virtual Collection<GroupRequest> GroupRequests { get; set; }
 
-        public Collection<Subject> Subjects { get; set; }
+        public virtual Collection<Subject> Subjects { get; set; }
 
     }
 }

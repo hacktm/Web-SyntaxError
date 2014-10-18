@@ -22,16 +22,9 @@ namespace CollegeBuffer.BLL.Repositories
         /// <returns>An UserAccount instance or null if there is no session for the user</returns>
         public User GetUser(Guid sessionId, string sessionKey)
         {
-            try
-            {
-                // ReSharper disable once PossibleNullReferenceException
-                return DbSet.FirstOrDefault(s => s.Id == sessionId && s.SessionKey == sessionKey).User;
-            }
+            var session = Get(sessionId);
 
-            catch
-            {
-                return null;
-            }
+            return (session != null && session.SessionKey == sessionKey) ? session.User : null;
         }
 
         /// <summary>
@@ -48,8 +41,9 @@ namespace CollegeBuffer.BLL.Repositories
                     User = DbContext.Users.First(u => u.Username == username),
                     SessionKey = TokenGenerator.EncryptMd5(DateTime.Now.ToFileTime().ToString())
                 };
-
-                return Insert(session);
+                
+                session = Insert(session);
+                return session;
             }
 
             catch

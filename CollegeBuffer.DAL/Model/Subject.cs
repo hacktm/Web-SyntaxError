@@ -2,7 +2,7 @@
 
 namespace CollegeBuffer.DAL.Model
 {
-    public sealed class Subject : AbstractModel
+    public class Subject : AbstractModel
     {
         public Subject()
         {
@@ -16,8 +16,8 @@ namespace CollegeBuffer.DAL.Model
 
         public byte[] ImageData { get; set; }
 
-        public Collection<User> Users { get; set; }
+        public virtual Collection<User> Users { get; set; }
 
-        public Collection<Group> Groups { get; set; }
+        public virtual Collection<Group> Groups { get; set; }
     }
 }

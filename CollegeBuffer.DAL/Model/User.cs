@@ -3,7 +3,7 @@ using CollegeBuffer.DAL.Model.Enums;
 
 namespace CollegeBuffer.DAL.Model
 {
-    public sealed class User : AbstractModel
+    public class User : AbstractModel
     {
         public User()
         {
@@ -27,16 +27,16 @@ namespace CollegeBuffer.DAL.Model
 
         public UserRoles Role { get; set; }
 
-        public Collection<Group> GroupsAsStudent { get; set; }
+        public virtual Collection<Group> GroupsAsStudent { get; set; }
 
-        public Collection<Group> GroupsAsAdministrator { get; set; }
+        public virtual Collection<Group> GroupsAsAdministrator { get; set; }
 
-        public Session Session { get; set; }
+        public virtual Session Session { get; set; }
 
-        public Collection<GroupRequest> GroupRequests { get; set; }
+        public virtual Collection<GroupRequest> GroupRequests { get; set; }
 
-        public Collection<Subject> Subjects { get; set; }
+        public virtual Collection<Subject> Subjects { get; set; }
 
-        public Collection<Comment> Comments { get; set; } 
+        public virtual Collection<Comment> Comments { get; set; } 
     }
 }

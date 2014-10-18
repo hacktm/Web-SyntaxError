@@ -47,7 +47,8 @@ namespace CollegeBuffer.DAL.Context
 
             entity = DbSet.Add(entity);
 
-            return Save() != 0 ? entity : null;
+            var result = Save() != 0 ? entity : null;
+            return result;
         }
 
         public T Update(T entity)

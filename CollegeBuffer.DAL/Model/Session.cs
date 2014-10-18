@@ -1,9 +1,9 @@
 ﻿namespace CollegeBuffer.DAL.Model
 {
-    public sealed class Session : AbstractModel
+    public class Session : AbstractModel
     {
         public string SessionKey { get; set; }
 
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }
