@@ -79,7 +79,7 @@
   <ItemGroup>
     <Compile Include="ContextInitializers\DatabaseContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupsContextInitializer.cs" />
-    <Compile Include="ContextInitializers\StudentsContextInitializer.cs" />
+    <Compile Include="ContextInitializers\UsersContextInitializer.cs" />
     <Compile Include="Context\BaseRepository.cs" />
     <Compile Include="Context\BaseUnitOfWork.cs" />
     <Compile Include="Context\DatabaseContext.cs" />

@@ -3,7 +3,7 @@ using CollegeBuffer.DAL.Model;
 
 namespace CollegeBuffer.DAL.ContextInitializers
 {
-    internal static class StudentsContextInitializer
+    internal static class UsersContextInitializer
     {
         internal static void InitializeContext(DbModelBuilder builder)
         {

@@ -15,13 +15,13 @@ namespace CollegeBuffer.DAL.ContextInitializers
 
             // Map normal group students to this table
             builder.Entity<Group>()
-                .HasMany(p => p.Students)
+                .HasMany(p => p.Users)
                 .WithMany(p => p.GroupsAsStudent)
                 .Map(m =>
                 {
                     m.ToTable("Users_Groups");
                     m.MapLeftKey("GroupId");
-                    m.MapRightKey("StudentId");
+                    m.MapRightKey("UserId");
                 });
 
             // Map administrator group students to this table
@@ -32,7 +32,7 @@ namespace CollegeBuffer.DAL.ContextInitializers
                 {
                     m.ToTable("Administrators_Groups");
                     m.MapLeftKey("GroupId");
-                    m.MapRightKey("StudentId");
+                    m.MapRightKey("UserId");
                 });
         }
     }

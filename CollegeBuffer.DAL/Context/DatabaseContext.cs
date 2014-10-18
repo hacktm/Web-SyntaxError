@@ -18,11 +18,11 @@ namespace CollegeBuffer.DAL.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            StudentsContextInitializer.InitializeContext(modelBuilder);
+            UsersContextInitializer.InitializeContext(modelBuilder);
             GroupsContextInitializer.InitializeContext(modelBuilder);
         }
 
-        public virtual DbSet<User> Students { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Group> Groups { get; set; }
     }
