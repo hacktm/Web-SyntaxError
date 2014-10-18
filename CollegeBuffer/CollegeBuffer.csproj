@@ -126,6 +126,8 @@
     </Compile>
     <Compile Include="Models\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Special\CookieHelper.cs" />
+    <Compile Include="Special\MySession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -177,6 +179,10 @@
     <ProjectReference Include="..\CollegeBuffer.BLL\CollegeBuffer.BLL.csproj">
       <Project>{babba430-a22c-4eb6-b07b-3f7de80215bf}</Project>
       <Name>CollegeBuffer.BLL</Name>
+    </ProjectReference>
+	<ProjectReference Include="..\CollegeBuffer.DAL\CollegeBuffer.DAL.csproj">
+      <Project>{B660C4EE-10FC-4B85-8A17-C2448EEA2D13}</Project>
+      <Name>CollegeBuffer.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
