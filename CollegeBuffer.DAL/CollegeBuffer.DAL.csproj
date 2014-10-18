@@ -77,6 +77,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextInitializers\CommentsContextInitializer.cs" />
     <Compile Include="ContextInitializers\DatabaseContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupRequestsContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupsContextInitializer.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Context\BaseUnitOfWork.cs" />
     <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Model\AbstractModel.cs" />
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Enums\UserRoles.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupRequest.cs" />

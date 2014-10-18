@@ -36,5 +36,7 @@ namespace CollegeBuffer.DAL.Model
         public Collection<GroupRequest> GroupRequests { get; set; }
 
         public Collection<Subject> Subjects { get; set; }
+
+        public Collection<Comment> Comments { get; set; } 
     }
 }
