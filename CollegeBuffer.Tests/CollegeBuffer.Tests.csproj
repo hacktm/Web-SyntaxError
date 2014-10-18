@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AnnouncementsTest.cs" />
+    <Compile Include="Models\CalendarsTest.cs" />
     <Compile Include="Models\CommentsTest.cs" />
     <Compile Include="Models\EventsTest.cs" />
     <Compile Include="Models\GroupRequestsTest.cs" />
