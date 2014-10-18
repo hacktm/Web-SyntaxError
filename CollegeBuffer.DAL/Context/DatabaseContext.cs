@@ -21,6 +21,7 @@ namespace CollegeBuffer.DAL.Context
             UsersContextInitializer.InitializeContext(modelBuilder);
             GroupsContextInitializer.InitializeContext(modelBuilder);
             SessionsContextInitializer.InitializeContext(modelBuilder);
+            GroupRequestsContextInitializer.InitializeContext(modelBuilder);
         }
 
         public virtual DbSet<User> Users { get; set; }
@@ -28,5 +29,7 @@ namespace CollegeBuffer.DAL.Context
         public virtual DbSet<Group> Groups { get; set; }
 
         public virtual DbSet<Session> Sessions { get; set; }
+
+        public virtual DbSet<GroupRequest> GroupRequests { get; set; }
     }
 }

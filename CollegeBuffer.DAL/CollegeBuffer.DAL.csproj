@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextInitializers\DatabaseContextInitializer.cs" />
+    <Compile Include="ContextInitializers\GroupRequestsContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupsContextInitializer.cs" />
     <Compile Include="ContextInitializers\SessionsContextInitializer.cs" />
     <Compile Include="ContextInitializers\UsersContextInitializer.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Model\AbstractModel.cs" />
     <Compile Include="Model\Enums\UserRoles.cs" />
     <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\GroupRequest.cs" />
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

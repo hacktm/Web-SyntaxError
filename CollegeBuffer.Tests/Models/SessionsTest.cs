@@ -36,6 +36,9 @@ namespace CollegeBuffer.Tests.Models
                 if (!db.SessionsRepository.Logout(user.Username))
                     throw new Exception("Session logout failed!");
 
+                if (!db.UsersRepository.Delete(user))
+                    throw new Exception("User could not be deleted!");
+
             }
         }
     }

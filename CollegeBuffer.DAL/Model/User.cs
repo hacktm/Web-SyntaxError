@@ -32,5 +32,7 @@ namespace CollegeBuffer.DAL.Model
         public Collection<Group> GroupsAsAdministrator { get; set; }
 
         public Session Session { get; set; }
+
+        public Collection<GroupRequest> GroupRequests { get; set; }
     }
 }
