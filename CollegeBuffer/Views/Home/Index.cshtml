@@ -1,31 +1,182 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using System.Web.UI.WebControls
+@using CollegeBuffer.Models
+@model HomePage
+
+@{
+    Layout = null;
 }
+<!DOCTYPE html>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<html ng-app='CollegeBuffer'>
+<head>
+    <title>@ViewBag.Title</title>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Content/css/simple-sidebar.css" />
+    <link rel="stylesheet" href="/Content/css/Site.css" />
+
+    <!--scripts-->
+    <script src="/Scripts/jquery-1.10.2.min.js" type="text/javascript"> </script>
+    <script src="/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"> </script>
+    <script src="/Scripts/bootstrap.min.js" type="text/javascript"> </script>
+@*    <script src="/Scripts/respond.min.js" type="text/javascript"> </script>*@
+
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css' />
+
+    <!--link rel="icon" type="image/png" href="/Content/favicon.png" /-->
+</head>
+<body>
+    <script>
+        var stop = false;
+    </script>
+
+    <style>
+        body {
+            background: url("/Content/images/cover.jpg") fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <div class="container-fluid" style="color:lightgrey">
+        <div class="visible-md visible-lg" style="margin-bottom: 100px;"></div>
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="jumbotron" style="background: none;">
+                <h1>Welcome to <br /> College Buffer! </h1>
+                <p>
+                    Keeping you up to date with life!<br />
+                    Making your student life flourish!
+                </p>
+                <p>You can login with <a class="btn btn-primary btn-lg" role="button">Facebook</a> or your account. </p>
+
+                @using (Ajax.BeginForm("Register", "Account", new AjaxOptions { OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "loginUser(data);stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }))
+                {
+                    <div class="input-group-lg blackinput">
+                        @Html.TextBoxFor(p => p.UserName, new { placeholder = "Username", @class = "input-lg" })
+                        @Html.PasswordFor(p => p.Password, new { placeholder = "Password", @class = "input-lg" })
+                    </div>
+                    <br/>
+                    <input type="submit" value="Log me in!" class="btn btn-lg btn-success" />
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <h1>Register now (using <a class="btn btn-primary btn" role="button">Facebook</a>)</h1>
+            <div class="input-group blackinput">
+                @using (Ajax.BeginForm("Register", "Account", new AjaxOptions {OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "loginUser(data);stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);"}))
+                {
+                    <table class="logintable">
+                        <tr>
+                            <td>@Html.TextBoxFor(p => p.FirstName, new {placeholder = "First Name", @class = "input-lg"})</td>
+                            <td>@Html.TextBoxFor(p => p.LastName, new {placeholder = "Last Name", @class = "input-lg"})</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.TextBoxFor(p => p.NewUserName, new {placeholder = "Username", @class = "input-lg"})</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.TextBoxFor(p => p.EmailAddress, new {placeholder = "Email", @class = "input-lg"})</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.PasswordFor(p => p.NewPassword, new {placeholder = "Password", @class = "input-lg"})</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.PasswordFor(p => p.PasswordAgain, new {placeholder = "Retype password", @class = "input-lg"})</td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" value="Register!" class="btn btn-lg btn-success"/></td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+
+
+    <!--message-->
+    <div id="message" class="alert"></div>
+    <div id="loading" class="loading"></div>
+
+    <!--user modal-->
+    <div id="usermodal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+
+
+    <script>
+        $('body').on('hidden.bs.modal', '.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+
+        function showMessage(className, text) {
+            $("#message").addClass(className);
+            $("#message").html(text);
+            $("#message").fadeToggle(200);
+            setTimeout(function () { $("#message").fadeToggle(500); }, 2000);
+            setTimeout(function () { $("#message").removeClass(className); }, 2600);
+        }
+        
+        /* Login&register functions */
+        function loginUser(data) {
+            //Initialisations
+            $("#UserName").css("border-color", "white");
+            $("#Password").css("border-color", "white");
+            $('#loading').hide();
+
+            if (data == "K") document.location.reload(true);
+            else if (data == "F") {
+                $("#UserName").css("border-color", "red");
+                $("#Password").css("border-color", "red");
+                showMessage('alert-danger', 'The username or password is incorrect!');
+            }
+        }
+
+        /*Ajax load pages*/
+        //var initial = 1;
+
+        function go(a, b, c) {
+            var page = '/' + a + '/' + b;
+            if (c != "")
+                page += '/' + c;
+
+            if (document.location.pathname != page)
+                history.pushState({ controller: a, method: b, id: c }, b, page);
+            setupPage(page);
+            event.preventDefault();
+        }
+
+        window.onpopstate = function (event) {
+            var str = document.location.pathname;
+            setupPage(str);
+            return false;
+        };
+
+        function setupPage(page) {
+            $("#loading").show();
+
+            $.ajax({
+                url: page,
+                data: { asPartial: 1 },
+                success: function (response) {
+                    $("#loading").hide();
+                    $("#contentbody").html(response);
+                },
+                error: function () {
+                    $("#loading").hide();
+                    showMessage("alert-danger", "The page failed to load!");
+                }
+            });
+            return false;
+        }
+
+        if (location.href.indexOf("#login") > 0)
+            showMessage('alert-danger', 'You need to be logged in!');
+    </script>
+
+</body>
+</html>
