@@ -27,6 +27,12 @@ namespace CollegeBuffer.DAL.ContextInitializers
                 .WithOptionalPrincipal(p => p.User)
                 .Map(m => m.MapKey("UserId"))
                 .WillCascadeOnDelete(true);
+
+            // Map to the Calendar table
+            builder.Entity<User>()
+                .HasOptional(p => p.Calendar)
+                .WithRequired(p => p.User)
+                .Map(m => m.MapKey("CalendarId"));
         }
     }
 }

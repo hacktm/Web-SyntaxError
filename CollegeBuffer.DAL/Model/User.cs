@@ -36,6 +36,8 @@ namespace CollegeBuffer.DAL.Model
 
         public virtual Session Session { get; set; }
 
+        public virtual Calendar Calendar { get; set; }
+
         public virtual Collection<Group> GroupsAsStudent { get; set; }
 
         public virtual Collection<Group> GroupsAsAdministrator { get; set; }

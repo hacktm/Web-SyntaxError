@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextInitializers\AnnouncementsContextInitializer.cs" />
+    <Compile Include="ContextInitializers\CalendarContextInitializer.cs" />
     <Compile Include="ContextInitializers\CommentsContextInitializer.cs" />
     <Compile Include="ContextInitializers\DatabaseContextInitializer.cs" />
     <Compile Include="ContextInitializers\EventsContextInitializer.cs" />
@@ -90,9 +91,12 @@
     <Compile Include="Context\BaseRepository.cs" />
     <Compile Include="Context\BaseUnitOfWork.cs" />
     <Compile Include="Context\DatabaseContext.cs" />
+    <Compile Include="Model\Abstract\AbstractEvent.cs" />
     <Compile Include="Model\Abstract\AbstractModel.cs" />
     <Compile Include="Model\Abstract\AbstractNotification.cs" />
     <Compile Include="Model\Announcement.cs" />
+    <Compile Include="Model\Calendar.cs" />
+    <Compile Include="Model\CalendarEntry.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Enums\UserRoles.cs" />
     <Compile Include="Model\Event.cs" />

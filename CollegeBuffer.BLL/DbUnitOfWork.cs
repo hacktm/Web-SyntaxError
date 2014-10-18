@@ -21,6 +21,8 @@ namespace CollegeBuffer.BLL
         private AnnouncementsRepository _announcementsRepository;
         private AnnouncementNotificationsRepository _announcementNotificationsRepository;
         private EventNotificationsRepository _eventNotificationsRepository;
+        private CalendarsRepository _calendarsRepository;
+        private CalendarEntriesRespository _calendarEntriesRespository;
 
         #endregion
 
@@ -97,6 +99,24 @@ namespace CollegeBuffer.BLL
             {
                 return _eventNotificationsRepository ??
                        (_eventNotificationsRepository = new EventNotificationsRepository(DbContext));
+            }
+        }
+
+        public CalendarsRepository CalendarsRepository
+        {
+            get
+            {
+                return _calendarsRepository ?? (_calendarsRepository = new CalendarsRepository(DbContext));
+            }
+
+        }
+
+        public CalendarEntriesRespository CalendarEntriesRespository
+        {
+            get
+            {
+                return _calendarEntriesRespository ??
+                       (_calendarEntriesRespository = new CalendarEntriesRespository(DbContext));
             }
         }
 

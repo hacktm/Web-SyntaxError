@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity.Migrations;
 using CollegeBuffer.DAL.Context;
 using CollegeBuffer.DAL.Model;
 using CollegeBuffer.DAL.Model.Enums;
