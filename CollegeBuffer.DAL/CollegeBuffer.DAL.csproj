@@ -80,6 +80,7 @@
     <Compile Include="ContextInitializers\AnnouncementsContextInitializer.cs" />
     <Compile Include="ContextInitializers\CommentsContextInitializer.cs" />
     <Compile Include="ContextInitializers\DatabaseContextInitializer.cs" />
+    <Compile Include="ContextInitializers\EventsContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupRequestsContextInitializer.cs" />
     <Compile Include="ContextInitializers\GroupsContextInitializer.cs" />
     <Compile Include="ContextInitializers\SessionsContextInitializer.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Model\Announcement.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\Enums\UserRoles.cs" />
+    <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Group.cs" />
     <Compile Include="Model\GroupRequest.cs" />
     <Compile Include="Model\Session.cs" />

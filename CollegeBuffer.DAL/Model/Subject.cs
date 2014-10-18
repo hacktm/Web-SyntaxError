@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace CollegeBuffer.DAL.Model
 {
@@ -8,6 +9,7 @@ namespace CollegeBuffer.DAL.Model
         {
             Users = new Collection<User>();
             Groups = new Collection<Group>();
+            Events = new Collection<Event>();
         }
 
         public string Name { get; set; }
@@ -19,5 +21,7 @@ namespace CollegeBuffer.DAL.Model
         public virtual Collection<User> Users { get; set; }
 
         public virtual Collection<Group> Groups { get; set; }
+
+        public virtual Collection<Event> Events { get; set; } 
     }
 }
