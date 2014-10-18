@@ -1,6 +1,9 @@
-﻿namespace CollegeBuffer.BLL.Interfaces
+﻿using CollegeBuffer.DAL.Model;
+
+namespace CollegeBuffer.BLL.Interfaces
 {
     internal interface IGroupsRepository
     {
+        Group[] GetAllSuperGroups();
     }
 }

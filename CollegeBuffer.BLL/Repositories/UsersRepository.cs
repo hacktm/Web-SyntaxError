@@ -11,6 +11,16 @@ namespace CollegeBuffer.BLL.Repositories
         {
         }
 
+        public User[] FilterUsers(string phrase)
+        {
+            var users = DbSet.Where(u =>
+                u.Username.Contains(phrase) || phrase.Contains(u.Username) ||
+                u.FirstName.Contains(phrase) || phrase.Contains(u.FirstName) ||
+                u.LastName.Contains(phrase) || phrase.Contains(u.LastName));
+
+            return users.ToArray();
+        }
+
         public bool VerifyExists(string username)
         {
             var user = DbSet.FirstOrDefault(u => u.Username == username);
