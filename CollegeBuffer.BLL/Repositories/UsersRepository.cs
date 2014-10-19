@@ -18,7 +18,7 @@ namespace CollegeBuffer.BLL.Repositories
                 u.FirstName.Contains(phrase) || phrase.Contains(u.FirstName) ||
                 u.LastName.Contains(phrase) || phrase.Contains(u.LastName));
 
-            return users.ToArray();
+            return users.OrderBy(u => u.Username).ToArray();
         }
 
         public bool VerifyExists(string username)

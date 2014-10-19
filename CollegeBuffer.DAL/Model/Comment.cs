@@ -15,6 +15,10 @@ namespace CollegeBuffer.DAL.Model
 
         public string Text { get; set; }
 
+        public Announcement Announcement { get; set; }
+
+        public Event Event { get; set; }
+
         public virtual User User { get; set; }
 
         public virtual Comment ParentComment { get; set; }

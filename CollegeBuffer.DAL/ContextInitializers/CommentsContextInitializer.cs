@@ -18,6 +18,18 @@ namespace CollegeBuffer.DAL.ContextInitializers
                 .WithMany(p => p.Comments)
                 .Map(m => m.MapKey("UserId"));
 
+            // Map to Announcements table
+            builder.Entity<Comment>()
+                .HasOptional(p => p.Announcement)
+                .WithMany(p => p.Comments)
+                .Map(m => m.MapKey("AnnouncementId"));
+
+            // Map to Events table
+            builder.Entity<Comment>()
+                .HasOptional(p => p.Event)
+                .WithMany(p => p.Comments)
+                .Map(m => m.MapKey("EventId"));
+
             // Map to self
             builder.Entity<Comment>()
                 .HasOptional(p => p.ParentComment)

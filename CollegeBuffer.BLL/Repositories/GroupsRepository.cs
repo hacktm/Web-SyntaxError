@@ -15,7 +15,7 @@ namespace CollegeBuffer.BLL.Repositories
         {
             var groups = DbSet.Where(g => g.SuperGroup == null);
 
-            return groups.ToArray();
+            return groups.OrderBy(g => g.Name).ToArray();
         }
     }
 }

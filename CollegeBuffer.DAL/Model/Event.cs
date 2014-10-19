@@ -8,6 +8,7 @@ namespace CollegeBuffer.DAL.Model
         public Event()
         {
             Subjects = new Collection<Subject>();
+            Comments = new Collection<Comment>();
         }
 
         public string Title { get; set; }
@@ -17,5 +18,7 @@ namespace CollegeBuffer.DAL.Model
         public string Place { get; set; }
 
         public virtual Collection<Subject> Subjects { get; set; }
+
+        public virtual Collection<Comment> Comments { get; set; }
     }
 }
