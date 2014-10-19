@@ -23,7 +23,7 @@ namespace CollegeBuffer.DAL.ContextInitializers
                 .WithMany(p => p.Events)
                 .Map(m =>
                 {
-                    m.ToTable("Subject");
+                    m.ToTable("Events_Subjects");
                     m.MapLeftKey("EventId");
                     m.MapRightKey("SubjectId");
                 });

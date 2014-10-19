@@ -14,6 +14,7 @@ namespace CollegeBuffer.DAL.Model
             StartDate = ev.StartDate;
             EndDate = ev.EndDate;
             NotificationStartDate = ev.NotificationStartDate;
+            Text = ev.Message;
         }
     }
 }
