@@ -114,30 +114,61 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\js\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\AnnouncementsController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupPage.cs" />
+    <Compile Include="Models\Groups.cs" />
+    <Compile Include="Models\HomePage.cs" />
+    <Compile Include="Models\Index.cs" />
+    <Compile Include="Models\MyGroups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Special\CookieHelper.cs" />
+    <Compile Include="Special\MySession.cs" />
+    <Compile Include="Special\Validations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap-theme.min.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\simple-sidebar.css" />
+    <Content Include="Content\css\Site.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\cover.jpg" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\css\bootstrap-theme.css.map" />
+    <Content Include="Content\css\bootstrap.css.map" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -153,15 +184,23 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Home\MyGroups.cshtml" />
+    <Content Include="Views\Groups\Group.cshtml" />
+    <Content Include="Views\Announcements\Announcement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CollegeBuffer.BLL\CollegeBuffer.BLL.csproj">
       <Project>{babba430-a22c-4eb6-b07b-3f7de80215bf}</Project>
       <Name>CollegeBuffer.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CollegeBuffer.DAL\CollegeBuffer.DAL.csproj">
+      <Project>{B660C4EE-10FC-4B85-8A17-C2448EEA2D13}</Project>
+      <Name>CollegeBuffer.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

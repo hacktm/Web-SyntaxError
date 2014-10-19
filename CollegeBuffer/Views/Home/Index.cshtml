@@ -1,31 +1,60 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model CollegeBuffer.Models.Index
+
+@if (Model.Error != null)
+{
+    <h1>@Model.Error</h1>
 }
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Announcements</h1>
+        </div>
+        <ul class="list-group">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+            @if (Model.Announcements != null && Model.Announcements.Count > 0)
+            {
+                foreach (var announcement in Model.Announcements)
+                {
+                    <li class="list-group-item">
+                        <h4><a href="/Users/User/@announcement.User.Id"><b>@announcement.User.Username</b></a> posted <a href="/Announcements/Announcement/@announcement.Id"><b>@announcement.Title</b></a> at <i>@announcement.Date.ToString()</i> in the <a href="/Groups/Group/@announcement.Group.Id"><b>@announcement.Group.Name</b></a> group.</h4>
+                        <hr />
+                        <p>@announcement.Message</p>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item"><br /><p>Nothing to see here...</p></li>
+            }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </ul>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Events</h1>
+        </div>
+        <ul class="list-group">
+
+            @if (Model.Events != null && Model.Events.Count > 0)
+            {
+                foreach (var oneEvent in Model.Events)
+                {
+                    <li class="list-group-item">
+                        <h4><a href="/Events/Event/@oneEvent.Id"><b>@oneEvent.Title</b></a> added at <i>@oneEvent.DateCreated.ToString()</i> in the <a href="/Groups/Group/@oneEvent.Group.Id"><b>@oneEvent.Group.Name</b></a> group.</h4>
+                        <hr />
+                        <p>@oneEvent.Message</p>
+                        <hr />
+                        <p>Start date: @oneEvent.StartDate | End date: @oneEvent.EndDate | Place: @oneEvent.Place</p>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item"><br /><p>Nothing to see here...</p></li>
+            }
+
+        </ul>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+}

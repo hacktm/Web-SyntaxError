@@ -1,0 +1,44 @@
+﻿@using CollegeBuffer.Special
+@model CollegeBuffer.Models.MyGroupsVM
+
+
+@if (Model.GroupsAsAdmin == null && Model.GroupsAsUser == null)
+{
+    <h1>No groups to show!</h1>
+}
+else
+{
+    if (Model.GroupsAsAdmin != null && Model.GroupsAsAdmin.Count > 0)
+    {
+        <h2>Groups you manage</h2>
+        <table class="table">
+            @foreach (var group in Model.GroupsAsAdmin)
+            {
+                <tr>
+                    <td><a href="/Groups/Group/@group.Id" onclick='go("Groups", "Group" , "@group.Id" ) '>@group.Name</a></td>
+                    <td>
+                        <span class="btn-group">
+                            <a href="/Groups/Edit/@group.Id" class="btn btn-warning" onclick='go("groups", "Edit" , "@group.Id" ) '>
+                                Edit
+                            </a>
+                            @Ajax.ActionLink("Delete", "Delete/" + group.Id, "Groups", new AjaxOptions { OnBegin = "if(stop){e.preventDefault();return false;}stop=true;return ask();", OnSuccess = "document.location.reload(true);setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }, new { @class = "btn btn-danger" })
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    if (Model.GroupsAsUser != null && Model.GroupsAsUser.Count > 0)
+    {
+        <h2>Groups you are a member of</h2>
+        <table class="table">
+            @foreach (var group in Model.GroupsAsUser)
+            {
+                <tr>
+                    <td><a href="/Groups/Group/@group.Id" onclick='go("Groups", "Group", "@group.Id") '>@group.Name</a></td>
+                </tr>
+            }
+        </table>
+    }
+}

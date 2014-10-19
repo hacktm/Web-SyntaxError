@@ -88,8 +88,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AnnouncementsTest.cs" />
+    <Compile Include="Models\CalendarsTest.cs" />
+    <Compile Include="Models\CommentsTest.cs" />
+    <Compile Include="Models\EventsTest.cs" />
+    <Compile Include="Models\GroupRequestsTest.cs" />
+    <Compile Include="Models\NotificationsTest.cs" />
+    <Compile Include="Models\SessionsTest.cs" />
+    <Compile Include="Models\SubjectsTest.cs" />
+    <Compile Include="Models\UsersGroupsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
@@ -98,6 +106,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CollegeBuffer.BLL\CollegeBuffer.BLL.csproj">
+      <Project>{BABBA430-A22C-4EB6-B07B-3F7DE80215BF}</Project>
+      <Name>CollegeBuffer.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CollegeBuffer.DAL\CollegeBuffer.DAL.csproj">
+      <Project>{B660C4EE-10FC-4B85-8A17-C2448EEA2D13}</Project>
+      <Name>CollegeBuffer.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CollegeBuffer\CollegeBuffer.csproj">
       <Project>{50708B32-4765-49DF-9FB9-E0EF0D5C5E93}</Project>
       <Name>CollegeBuffer</Name>

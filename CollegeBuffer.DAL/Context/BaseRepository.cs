@@ -2,36 +2,26 @@
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using CollegeBuffer.DAL.Model;
+using CollegeBuffer.DAL.Model.Abstract;
 
 namespace CollegeBuffer.DAL.Context
 {
     public abstract class BaseRepository<T> where T : AbstractModel
     {
-        private readonly DatabaseContext _dbContext;
-        private readonly DbSet<T> _dbSet;
+        protected readonly DatabaseContext DbContext;
+        public readonly DbSet<T> DbSet;
 
         protected BaseRepository(DatabaseContext context)
         {
-            _dbContext = context;
-            _dbSet = context.Set<T>();
+            DbContext = context;
+            DbSet = context.Set<T>();
         }
 
         #region Persistence logic
 
-        public bool Save()
+        public int Save()
         {
-            try
-            {
-                _dbContext.SaveChanges();
-
-                return true;
-            }
-
-            catch
-            {
-                return false;
-            }
+            return DbContext.SaveChanges();
         }
 
         #endregion
@@ -40,43 +30,47 @@ namespace CollegeBuffer.DAL.Context
 
         public T Get(Guid id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = DbSet.Find(id);
             return entity;
         }
 
         public T[] GetAll()
         {
-            var entities = _dbSet.ToArray();
+            var entities = DbSet.ToArray();
             return entities;
         }
 
         public T Insert(T entity)
         {
-            entity = _dbSet.Add(entity);
+            if (entity.Id == Guid.Empty)
+                entity.Id = Guid.NewGuid();
 
-            return Save() ? entity : null;
+            entity = DbSet.Add(entity);
+
+            var result = Save() != 0 ? entity : null;
+            return result;
         }
 
         public T Update(T entity)
         {
-            _dbSet.AddOrUpdate(entity);
+            DbSet.AddOrUpdate(entity);
 
-            return Save() ? Get(entity.Id) : null;
+            return Save() != 0 ? Get(entity.Id) : null;
         }
 
         public bool Delete(T entity)
         {
-            if (_dbContext.Entry(entity).State == EntityState.Detached)
-                _dbSet.Attach(entity);
+            if (DbContext.Entry(entity).State == EntityState.Detached)
+                DbSet.Attach(entity);
 
-            _dbSet.Remove(entity);
+            DbSet.Remove(entity);
 
-            return Save();
+            return Save() != 0;
         }
 
         public bool Delete(Guid id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = DbSet.Find(id);
 
             return Delete(entity);
         }

@@ -1,0 +1,65 @@
+﻿@using CollegeBuffer.DAL.Model
+@using Microsoft.Ajax.Utilities
+@model CollegeBuffer.Models.Groups
+
+
+<ol class="breadcrumb" style="font-size: 18px;">
+    <li><a href="/Groups/Index/" onclick='go("Groups", "Index", "");'>College Groups</a></li>
+    @if (Model.GroupPath != null && Model.GroupPath.Count > 0)
+    {
+        var i = 0;
+        foreach (var path in Model.GroupPath)
+        {
+            i++;
+            if (i < Model.GroupPath.Count)
+            {
+                <li><a href="/Groups/Index/@path.Id" onclick='go("Groups", "Index", "@path.Id")'>@path.Name</a></li>
+            }
+            else
+            {
+                <li class="active">@path.Name</li>
+            }
+        }
+    }
+    @if (!Model.AdministrativeRole && Model.GroupPath != null && Model.GroupPath.Count > 0)
+    {
+        @Ajax.ActionLink("Join group!", "Join/" + Model.GroupPath.Last().Id, "Groups", new AjaxOptions { OnBegin = "if(stop){e.preventDefault();return false;}stop=true;", OnSuccess = "join(data);setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }, new { @class = "btn btn-sm btn-primary", @style="margin-left: 10px;" });
+    }
+</ol>
+
+
+@if (Model.AdministrativeRole)
+{
+    <a href="/Groups/Create/@(Model.GroupPath != null && Model.GroupPath.Count > 0?Model.GroupPath.Last().Id.ToString():"")" onclick='go("groups", "Create" , "@(Model.GroupPath != null && Model.GroupPath.Count > 0?Model.GroupPath.Last().Id.ToString():"")" ) ' class="btn btn-lg btn-success">Create a group at the current path!</a>
+}
+
+
+<br />
+<br />
+
+@if (Model.ChildGroups == null)
+{
+    <h1>No subgroups to show!</h1>
+}
+else
+{
+    <table class="table">
+        @foreach (var group in Model.ChildGroups)
+        {
+            <tr>
+                <td><a href="/Groups/Index/@group.Id" onclick='go("Groups", "Index", "@group.Id")'>@group.Name</a></td>
+                @if (Model.AdministrativeRole)
+                {
+                    <td>
+                        <span class="btn-group">
+                            <a href="/Groups/Edit/@group.Id" class="btn btn-warning" onclick='go("Groups", "Edit", "@group.Id")'>
+                                Edit
+                            </a>
+                            @Ajax.ActionLink("Delete", "Delete/" + group.Id, "Groups", new AjaxOptions { OnBegin = "if(stop){e.preventDefault();return false;}stop=true;return ask();", OnSuccess = "document.location.reload(true);setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }, new { @class = "btn btn-danger" })
+                        </span>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+}

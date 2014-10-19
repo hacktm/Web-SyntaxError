@@ -75,7 +75,32 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbUnitOfWork.cs" />
+    <Compile Include="Interfaces\IAnnouncementNotificationsRepository.cs" />
+    <Compile Include="Interfaces\IAnnouncementsRepository.cs" />
+    <Compile Include="Interfaces\ICalendarEntriesRepository.cs" />
+    <Compile Include="Interfaces\ICalendarsRepository.cs" />
+    <Compile Include="Interfaces\ICommentsRepository.cs" />
+    <Compile Include="Interfaces\IEventNotificationsRepository.cs" />
+    <Compile Include="Interfaces\IEventsRepository.cs" />
+    <Compile Include="Interfaces\IGroupRequestsRepository.cs" />
+    <Compile Include="Interfaces\IGroupsRepository.cs" />
+    <Compile Include="Interfaces\ISubjectsRepository.cs" />
+    <Compile Include="Interfaces\IUsersRepository.cs" />
+    <Compile Include="Interfaces\ISessionsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AnnouncementNotificationsRepository.cs" />
+    <Compile Include="Repositories\AnnouncementsRepository.cs" />
+    <Compile Include="Repositories\CalendarEntriesRespository.cs" />
+    <Compile Include="Repositories\CalendarsRepository.cs" />
+    <Compile Include="Repositories\CommentsRepository.cs" />
+    <Compile Include="Repositories\EventNotificationsRepository.cs" />
+    <Compile Include="Repositories\EventsRepository.cs" />
+    <Compile Include="Repositories\GroupRequestsRepository.cs" />
+    <Compile Include="Repositories\GroupsRepository.cs" />
+    <Compile Include="Repositories\SessionsRepository.cs" />
+    <Compile Include="Repositories\SubjectsRepository.cs" />
+    <Compile Include="Repositories\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CollegeBuffer.DAL\CollegeBuffer.DAL.csproj">
@@ -83,6 +108,7 @@
       <Name>CollegeBuffer.DAL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
