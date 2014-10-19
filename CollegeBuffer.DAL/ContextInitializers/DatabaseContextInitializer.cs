@@ -1,5 +1,5 @@
-﻿#define TESTS
-//#undef TESTS
+﻿//#define TESTS
+#undef TESTS
 using System;
 using System.Data.Entity;
 using System.Linq;

@@ -1,0 +1,25 @@
+﻿@model CollegeBuffer.Models.GroupVM
+
+<h1>Create a new group</h1>
+
+@using (Ajax.BeginForm("New", "Groups", new AjaxOptions { OnBegin = "if(stop)e.preventDefault();$('#loading').show();stop=true;", OnSuccess = "create(data,'Groups', 'Index', '');stopForm=false;setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }))
+{
+    <input type="hidden" name="ParentGroupId" value="@(Model.ParentGroup!=null?Model.ParentGroup.Id.ToString():"")" />
+
+    <table class="table">
+        <tr>
+            <td>Member of</td>
+            <td>@(Model.ParentGroup != null ? Model.ParentGroup.Name : "-")</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Name)</td>
+            <td>@Html.TextBoxFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Description)</td>
+            <td>@Html.TextAreaFor(m => m.Description)</td>
+        </tr>
+    </table>
+
+    <input type="submit" class="btn btn-lg btn-success" value="Create group!" />
+}

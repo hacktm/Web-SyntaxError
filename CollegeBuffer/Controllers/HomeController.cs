@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using CollegeBuffer.BLL;
-using CollegeBuffer.BLL.Repositories;
 using CollegeBuffer.DAL.Model;
 using CollegeBuffer.Models;
 using CollegeBuffer.Special;
@@ -49,7 +45,7 @@ namespace CollegeBuffer.Controllers
                 {
                     model.Error = "You don't belong to any groups!";
                     if (asPartial == 1)
-                        return PartialView(model);
+                        return Content("<h1>" + model.Error + "</h1>");
                     return View(model);
                 }
 

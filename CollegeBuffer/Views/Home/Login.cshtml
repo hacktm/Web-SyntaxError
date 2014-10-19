@@ -165,46 +165,7 @@
             }
         }
 
-        /*Ajax load pages*/
-        //var initial = 1;
-
-        function go(a, b, c) {
-            var page = '/' + a + '/' + b;
-            if (c != "")
-                page += '/' + c;
-
-            if (document.location.pathname != page)
-                history.pushState({ controller: a, method: b, id: c }, b, page);
-            setupPage(page);
-            event.preventDefault();
-        }
-
-        window.onpopstate = function (event) {
-            var str = document.location.pathname;
-            setupPage(str);
-            return false;
-        };
-
-        function setupPage(page) {
-            $("#loading").show();
-
-            $.ajax({
-                url: page,
-                data: { asPartial: 1 },
-                success: function (response) {
-                    $("#loading").hide();
-                    $("#contentbody").html(response);
-                },
-                error: function () {
-                    $("#loading").hide();
-                    showMessage("alert-danger", "The page failed to load!");
-                }
-            });
-            return false;
-        }
-
-        if (location.href.indexOf("#login") > 0)
-            showMessage('alert-danger', 'You need to be logged in!');
+        
     </script>
 
 </body>

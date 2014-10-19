@@ -101,7 +101,7 @@ namespace CollegeBuffer.Controllers
         /// Log out the currently logged in user
         /// </summary>
         /// <returns></returns>
-        public string LogOut()
+        public ActionResult LogOut()
         {
             //Delete the cookies
             _myCookie.DeleteCookie("sessionId");
@@ -115,12 +115,13 @@ namespace CollegeBuffer.Controllers
                 MySession.Current.UserDetails = null;
                 using (var db = DbUnitOfWork.NewInstance())
                 {
-                    return db.SessionsRepository.Logout(userName) ? "K" : "F";
+                    db.SessionsRepository.Logout(userName);
+                    return Redirect("/Home/Index");
                 }
             }
             catch (Exception)
             {
-                return "F";
+                return Redirect("/Home/Index");
             }
         }
 
