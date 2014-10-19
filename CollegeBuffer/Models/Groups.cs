@@ -18,5 +18,6 @@ namespace CollegeBuffer.Models
         public Group[] ChildGroups { get; set; }
 
         public bool AdministrativeRole { get; set; }
+ 
     }
 }

@@ -115,7 +115,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\js\" />
-    <Folder Include="Views\Announcements\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -129,10 +128,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupPage.cs" />
     <Compile Include="Models\Groups.cs" />
     <Compile Include="Models\HomePage.cs" />
     <Compile Include="Models\Index.cs" />
+    <Compile Include="Models\MyGroups.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Special\CookieHelper.cs" />
     <Compile Include="Special\MySession.cs" />
@@ -180,11 +182,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Groups\Index.cshtml" />
     <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Home\MyGroups.cshtml" />
+    <Content Include="Views\Groups\Group.cshtml" />
+    <Content Include="Views\Announcements\Announcement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CollegeBuffer.BLL\CollegeBuffer.BLL.csproj">

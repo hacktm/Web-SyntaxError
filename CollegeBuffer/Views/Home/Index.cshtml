@@ -30,4 +30,31 @@ else
 
         </ul>
     </div>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Events</h1>
+        </div>
+        <ul class="list-group">
+
+            @if (Model.Events != null && Model.Events.Count > 0)
+            {
+                foreach (var oneEvent in Model.Events)
+                {
+                    <li class="list-group-item">
+                        <h4><a href="/Events/Event/@oneEvent.Id"><b>@oneEvent.Title</b></a> added at <i>@oneEvent.DateCreated.ToString()</i> in the <a href="/Groups/Group/@oneEvent.Group.Id"><b>@oneEvent.Group.Name</b></a> group.</h4>
+                        <hr />
+                        <p>@oneEvent.Message</p>
+                        <hr />
+                        <p>Start date: @oneEvent.StartDate | End date: @oneEvent.EndDate | Place: @oneEvent.Place</p>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item"><br /><p>Nothing to see here...</p></li>
+            }
+
+        </ul>
+    </div>
 }

@@ -11,6 +11,8 @@ namespace CollegeBuffer.Models
     {
         public List<Announcement> Announcements { get; set; }
 
+        public List<Event> Events { get; set; } 
+
         public String Error = null;
 
     }

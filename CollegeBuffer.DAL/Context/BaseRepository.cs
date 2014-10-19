@@ -9,7 +9,7 @@ namespace CollegeBuffer.DAL.Context
     public abstract class BaseRepository<T> where T : AbstractModel
     {
         protected readonly DatabaseContext DbContext;
-        protected readonly DbSet<T> DbSet;
+        public readonly DbSet<T> DbSet;
 
         protected BaseRepository(DatabaseContext context)
         {

@@ -1,0 +1,19 @@
+﻿@model CollegeBuffer.DAL.Model.Announcement
+           
+<h1>Announcement: @Model.Title</h1>
+<h2><i>@Model.Date.ToString()</i></h2>
+<h3>@Model.Message</h3>
+
+@if (Model.Comments != null && Model.Comments.Count > 0)
+{
+    <hr />
+    <ul class="list-group">
+        @foreach (var comment in Model.Comments)
+        {
+            <li class="list-group-item list-group-item-info">
+                <b>@comment.User.Username</b> at <i>@comment.Date.ToString()</i> said:<br />
+                @comment.Text
+            </li>
+        }
+    </ul>
+}

@@ -3,8 +3,8 @@
 @model CollegeBuffer.Models.Groups
 
 
-<ol class="breadcrumb">
-    <li><a href="/Groups/Index/" onclick='go("Groups", "Index", "")'>College Groups</a></li>
+<ol class="breadcrumb" style="font-size: 18px;">
+    <li><a href="/Groups/Index/" onclick='go("Groups", "Index", "");'>College Groups</a></li>
     @if (Model.GroupPath != null && Model.GroupPath.Count > 0)
     {
         var i = 0;
@@ -21,6 +21,10 @@
             }
         }
     }
+    @if (!Model.AdministrativeRole && Model.GroupPath != null && Model.GroupPath.Count > 0)
+    {
+        @Ajax.ActionLink("Join group!", "Join/" + Model.GroupPath.Last().Id, "Groups", new AjaxOptions { OnBegin = "if(stop){e.preventDefault();return false;}stop=true;", OnSuccess = "join(data);setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }, new { @class = "btn btn-sm btn-primary", @style="margin-left: 10px;" });
+    }
 </ol>
 
 
@@ -28,13 +32,7 @@
 {
     <a href="/Groups/Create/@(Model.GroupPath != null && Model.GroupPath.Count > 0?Model.GroupPath.Last().Id.ToString():"")" onclick='go("groups", "Create" , "@(Model.GroupPath != null && Model.GroupPath.Count > 0?Model.GroupPath.Last().Id.ToString():"")" ) ' class="btn btn-lg btn-success">Create a group at the current path!</a>
 }
-else
-{
-    if (Model.GroupPath != null && Model.GroupPath.Count > 0)
-    {
-        @Ajax.ActionLink("Join group!", "Join/" + Model.GroupPath.Last().Id, "Groups", new AjaxOptions { OnBegin = "if(stop){e.preventDefault();return false;}stop=true;", OnSuccess = "join(data);setTimeout(function () { stop = false; }, 10);", OnFailure = "showMessage('alert-danger', 'Failed!');setTimeout(function () { stop = false; }, 10);" }, new { @class = "btn btn-lg btn-primary" });
-    }
-}
+
 
 <br />
 <br />

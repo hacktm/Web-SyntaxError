@@ -7,7 +7,7 @@ using CollegeBuffer.DAL.Model;
 
 namespace CollegeBuffer.Models
 {
-    public class MyGroups
+    public class MyGroupsVM
     {
         public Collection<Group> GroupsAsAdmin { get; set; }
         public Collection<Group> GroupsAsUser { get; set; }

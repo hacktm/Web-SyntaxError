@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web.Mvc;
 using CollegeBuffer.BLL;
@@ -154,7 +155,7 @@ namespace CollegeBuffer.Controllers
                     null)
                 {
                     myUser.GroupsAsStudent.Add(group);
-                    return db.UsersRepository.Update(myUser)!=null?"K":"F";
+                    return db.UsersRepository.Update(myUser) != null ? "K" : "F";
                 }
 
                 return "F";
@@ -162,14 +163,32 @@ namespace CollegeBuffer.Controllers
 
         }
 
-        public ActionResult MyGroups(int asPartial = 0)
+        public ActionResult Group(string id, int asPartial = 0)
         {
             if (MySession.Current.UserDetails == null)
                 MySession.Current.UserDetails = new AccountController().GetUserDetails();
             if (MySession.Current.UserDetails == null)
                 return Redirect("/Home/Login");
 
-            return Content("");
+            var model = new GroupPage();
+            var db = DbUnitOfWork.NewInstance();
+            Group group = null;
+
+            if (id != null)
+                group = db.GroupsRepository.Get(new Guid(id));
+
+            if (group != null)
+            {
+                model.Announcements = new Collection<Announcement>(group.Announcements.OrderByDescending(p=>p.Date).ToArray());
+                model.Events = new Collection<Event>(group.Events.OrderByDescending(p=>p.DateCreated).ToArray());
+                model.Description = group.Description;
+                model.Name = group.Name;
+                model.GroupId = group.Id.ToString();
+            }
+
+            if (asPartial == 1)
+                return PartialView(model);
+            return View(model);
         }
 
     }
