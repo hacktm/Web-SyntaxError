@@ -257,6 +257,7 @@ namespace CollegeBuffer.DAL.ContextInitializers
             using (var db = new DatabaseContext())
             {
                 comment.User = db.Users.First();
+                exam1.Group = exam2.Group = boboParty.Group = db.Groups.FirstOrDefault(g => g.Name == "CTI");
 
                 db.Events.Add(exam1);
                 db.Events.Add(exam2);
