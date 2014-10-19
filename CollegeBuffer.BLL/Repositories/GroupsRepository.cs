@@ -17,5 +17,12 @@ namespace CollegeBuffer.BLL.Repositories
 
             return groups.OrderBy(g => g.Name).ToArray();
         }
+
+        public bool SafeDeleteGroup(Group group)
+        {
+            if (@group.SubGroups.Count <= 0) return Delete(@group);
+            
+            return @group.SubGroups.All(SafeDeleteGroup) && Delete(@group);
+        }
     }
 }

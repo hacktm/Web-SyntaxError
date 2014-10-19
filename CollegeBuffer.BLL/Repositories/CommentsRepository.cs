@@ -2,7 +2,6 @@
 using CollegeBuffer.BLL.Interfaces;
 using CollegeBuffer.DAL.Context;
 using CollegeBuffer.DAL.Model;
-using CollegeBuffer.DAL.Model.Abstract;
 
 namespace CollegeBuffer.BLL.Repositories
 {
@@ -10,6 +9,13 @@ namespace CollegeBuffer.BLL.Repositories
     {
         public CommentsRepository(DatabaseContext context) : base(context)
         {
+        }
+
+        public bool SafeDeleteComment(Comment comment)
+        {
+            if (@comment.Replies.Count <= 0) return Delete(@comment);
+
+            return @comment.Replies.All(SafeDeleteComment) && Delete(@comment);
         }
     }
 }
