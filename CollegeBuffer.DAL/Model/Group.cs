@@ -23,6 +23,8 @@ namespace CollegeBuffer.DAL.Model
 
         public virtual Group SuperGroup { get; set; }
 
+        public virtual Collection<Event> Events { get; set; }
+
         public virtual Collection<User> Users { get; set; }
 
         public virtual Collection<User> Administrators { get; set; }

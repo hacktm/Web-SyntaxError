@@ -27,6 +27,12 @@ namespace CollegeBuffer.DAL.ContextInitializers
                     m.MapLeftKey("EventId");
                     m.MapRightKey("SubjectId");
                 });
+
+            // Map to the Groups table
+            builder.Entity<Event>()
+                .HasOptional(p => p.Group)
+                .WithMany(p => p.Events)
+                .Map(m => m.MapKey("GroupId"));
         }
     }
 }

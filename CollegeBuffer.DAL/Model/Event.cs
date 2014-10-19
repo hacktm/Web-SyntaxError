@@ -17,6 +17,8 @@ namespace CollegeBuffer.DAL.Model
 
         public string Place { get; set; }
 
+        public virtual Group Group { get; set; }
+
         public virtual Collection<Subject> Subjects { get; set; }
 
         public virtual Collection<Comment> Comments { get; set; }
