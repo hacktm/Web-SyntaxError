@@ -4,6 +4,8 @@
 <h2><i>@Model.Date.ToString()</i></h2>
 <h3>@Model.Message</h3>
 
+
+
 @if (Model.Comments != null && Model.Comments.Count > 0)
 {
     <hr />
@@ -17,3 +19,10 @@
         }
     </ul>
 }
+
+<div class="input-group">
+    <input type="text" class="form-control">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Leave a comment!</button>
+    </span>
+</div><!-- /input-group -->

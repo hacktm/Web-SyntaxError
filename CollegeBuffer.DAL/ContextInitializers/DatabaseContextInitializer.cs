@@ -1,5 +1,5 @@
-﻿#define TESTS
-//#undef TESTS
+﻿//#define TESTS
+#undef TESTS
 #define MOCK
 //#undef MOCK
 using System;
