@@ -66,15 +66,54 @@ namespace CollegeBuffer.DAL.ContextInitializers
                 Message = "Welcome to CollegeBuffer. Have a nice stay!",
             };
 
+            var com1 = new Comment
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                Text = "Awesome comment nr. 1"
+            };
+
+            var com2 = new Comment
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                Text = "Awesome comment nr. 2"
+            };
+
+            var com3 = new Comment
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                Text = "Awesome comment nr. 3"
+            };
+
+            var com4 = new Comment
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                Text = "Awesome comment nr. 4"
+            };
+
             using (var db = new DatabaseContext())
             {
                 var group = db.Groups.FirstOrDefault(g => g.Name == "AC");
                 var upt = db.Groups.FirstOrDefault(g => g.Name == "UPT");
-                var user = db.Users.FirstOrDefault(u => u.Role == UserRoles.Administrator);
+                var admin = db.Users.FirstOrDefault(u => u.Role == UserRoles.Administrator);
+                var codo = db.Users.FirstOrDefault(u => u.Username == "coddo");
+                var neagu = db.Users.FirstOrDefault(u => u.Username == "neagu");
 
-                ann1.User = ann2.User = ann3.User = user;
+                com1.Replies.Add(com3);
+                com1.User = codo;
+                com2.User = neagu;
+                com3.User = neagu;
+                com4.User = codo;
+
+                ann1.User = ann2.User = ann3.User = admin;
                 ann1.Group = ann3.Group = group;
                 ann2.Group = upt;
+                ann1.Comments.Add(com1);
+                ann1.Comments.Add(com4);
+                ann3.Comments.Add((com2));
 
                 db.Announcements.Add(ann1);
                 db.Announcements.Add(ann2);
