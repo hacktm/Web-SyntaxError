@@ -32,7 +32,9 @@ namespace CollegeBuffer.Tests.Models
                 DateCreated = DateTime.Now,
                 StartDate = DateTime.Now.AddDays(1),
                 EndDate = DateTime.Now.AddDays(2),
-                NotificationStartDate = DateTime.Now
+                NotificationStartDate = DateTime.Now,
+                Title = "Event",
+                Message = "event message"
             };
 
             using (var db = new DatabaseContext())
@@ -49,7 +51,6 @@ namespace CollegeBuffer.Tests.Models
                     {
                         Id = Guid.NewGuid(),
                         Calendar = calendar,
-                        Text = "entry" + i
                     };
 
                     calendarEntries[i].CopyEvent(ev);

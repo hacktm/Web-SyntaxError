@@ -69,10 +69,12 @@ namespace CollegeBuffer.DAL.ContextInitializers
             using (var db = new DatabaseContext())
             {
                 var group = db.Groups.FirstOrDefault(g => g.Name == "AC");
+                var upt = db.Groups.FirstOrDefault(g => g.Name == "UPT");
                 var user = db.Users.FirstOrDefault(u => u.Role == UserRoles.Administrator);
 
                 ann1.User = ann2.User = ann3.User = user;
-                ann1.Group = ann2.Group = ann3.Group = group;
+                ann1.Group = ann3.Group = group;
+                ann2.Group = upt;
 
                 db.Announcements.Add(ann1);
                 db.Announcements.Add(ann2);
@@ -257,7 +259,8 @@ namespace CollegeBuffer.DAL.ContextInitializers
             using (var db = new DatabaseContext())
             {
                 comment.User = db.Users.First();
-                exam1.Group = exam2.Group = boboParty.Group = db.Groups.FirstOrDefault(g => g.Name == "CTI");
+                exam1.Group = exam2.Group = db.Groups.FirstOrDefault(g => g.Name == "CTI");
+                boboParty.Group = db.Groups.FirstOrDefault(g => g.Name == "AC");
 
                 db.Events.Add(exam1);
                 db.Events.Add(exam2);
