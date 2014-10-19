@@ -12,8 +12,11 @@ namespace CollegeBuffer.Models
         public Groups()
         {
             GroupPath = new List<Group>();
+            AdministrativeRole = false;
         }
         public List<Group> GroupPath { get; set; }
         public Group[] ChildGroups { get; set; }
+
+        public bool AdministrativeRole { get; set; }
     }
 }

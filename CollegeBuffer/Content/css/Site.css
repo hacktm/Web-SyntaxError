@@ -1,6 +1,6 @@
 * {
     font-family: 'PT Sans', sans-serif;
-  }
+}
 
 .logintable td {
     padding: 5px;
@@ -15,6 +15,17 @@
 
 .redborder {
     border-color: red;
+}
+
+h4 {
+    margin-top: 0px;
+    margin-bottom: -15px;
+}
+
+.list-group-item p{
+    font-size: 18px;
+    margin-bottom: 0px;
+    margin-top: -10px;
 }
 
 
@@ -55,17 +66,29 @@
 
 
 @-webkit-keyframes fadeInOut {
-    0% { opacity: 0.5; }
+    0% {
+        opacity: 0.5;
+    }
 
-    50% { opacity: 1; }
+    50% {
+        opacity: 1;
+    }
 
-    100% { opacity: 0.5; }
+    100% {
+        opacity: 0.5;
+    }
 }
 
 @keyframes fadeInOut {
-    0% { opacity: 0.5; }
+    0% {
+        opacity: 0.5;
+    }
 
-    50% { opacity: 1; }
+    50% {
+        opacity: 1;
+    }
 
-    100% { opacity: 0.5; }
+    100% {
+        opacity: 0.5;
+    }
 }

@@ -25,7 +25,11 @@ namespace CollegeBuffer.Controllers
                 Group currentGroup = null;
 
                 if (id == null || (currentGroup = db.GroupsRepository.Get(new Guid(id))) == null)
+                {
                     model.ChildGroups = db.GroupsRepository.GetAllSuperGroups();
+                    if (MySession.Current.UserDetails.Role == UserRoles.Administrator)
+                        model.AdministrativeRole = true;
+                }
                 else
                 {
                     model.ChildGroups = currentGroup.SubGroups.ToArray();
@@ -35,6 +39,10 @@ namespace CollegeBuffer.Controllers
                         model.GroupPath.Insert(0, group);
                     }
                     model.GroupPath.Add(currentGroup);
+
+                    var myUser = db.UsersRepository.Get(MySession.Current.UserDetails.Id);
+                    if (myUser.GroupsAsAdministrator.Contains(currentGroup) || myUser.Role == UserRoles.Administrator)
+                        model.AdministrativeRole = true;
                 }
 
                 if (asPartial == 1)
@@ -128,6 +136,28 @@ namespace CollegeBuffer.Controllers
                     return "F";
 
                 return db.GroupsRepository.Delete(group) ? "K" : "F";
+            }
+        }
+
+        public string Join(string id)
+        {
+            if (MySession.Current.UserDetails == null)
+                MySession.Current.UserDetails = new AccountController().GetUserDetails();
+            if (MySession.Current.UserDetails == null || id == null)
+                return "F";
+
+            using (var db = DbUnitOfWork.NewInstance())
+            {
+                var group = db.GroupsRepository.Get(new Guid(id));
+                var myUser = db.UsersRepository.Get(MySession.Current.UserDetails.Id);
+                if (myUser.GroupsAsAdministrator.Union(myUser.GroupsAsStudent).FirstOrDefault(p => p.Id == group.Id) ==
+                    null)
+                {
+                    myUser.GroupsAsStudent.Add(group);
+                    return db.UsersRepository.Update(myUser)!=null?"K":"F";
+                }
+
+                return "F";
             }
 
         }

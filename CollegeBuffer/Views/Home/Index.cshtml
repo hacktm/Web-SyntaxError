@@ -1,12 +1,33 @@
 ﻿@model CollegeBuffer.Models.Index
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
 @if (Model.Error != null)
 {
     <h1>@Model.Error</h1>
 }
 else
 {
-    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">Announcements</h1>
+        </div>
+        <ul class="list-group">
+
+            @if (Model.Announcements != null && Model.Announcements.Count > 0)
+            {
+                foreach (var announcement in Model.Announcements)
+                {
+                    <li class="list-group-item">
+                        <h4><a href="/Users/User/@announcement.User.Id"><b>@announcement.User.Username</b></a> posted <a href="/Announcements/Announcement/@announcement.Id"><b>@announcement.Title</b></a> at <i>@announcement.Date.ToString()</i> in the <a href="/Groups/Group/@announcement.Group.Id"><b>@announcement.Group.Name</b></a> group.</h4>
+                        <hr />
+                        <p>@announcement.Message</p>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="list-group-item"><br /><p>Nothing to see here...</p></li>
+            }
+
+        </ul>
+    </div>
 }

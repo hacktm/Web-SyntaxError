@@ -38,7 +38,7 @@ namespace CollegeBuffer.Controllers
                 foreach (var group in myUser.GroupsAsAdministrator.Union(myUser.GroupsAsStudent))
                 {
                     noOfGroups++;
-                    announcements.AddRange(group.Announcements);
+                    announcements.AddRange(group.Announcements.OrderByDescending(p=>p.Date).Take(5));
                 }
 
                 if (noOfGroups == 0)
@@ -48,7 +48,6 @@ namespace CollegeBuffer.Controllers
                         return Content("<h1>" + model.Error + "</h1>");
                     return View(model);
                 }
-
 
                 model.Announcements = announcements;
 
