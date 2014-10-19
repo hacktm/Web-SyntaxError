@@ -32,11 +32,18 @@ namespace CollegeBuffer.DAL.ContextInitializers
             CreateImplicitAdmin();
 
 #if MOCK
-            PopulateGroups();
-            PopulateUsers();
-            PopulateCalendar();
-            PopulateEvents();
-            PopulateAnnouncements();
+            var db = new DatabaseContext();
+
+            if (!db.Groups.Any())
+            {
+                PopulateGroups();
+                PopulateUsers();
+                PopulateCalendar();
+                PopulateEvents();
+                PopulateAnnouncements();
+            }
+
+            db.Dispose();
 #endif
         }
 
